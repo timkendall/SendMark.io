@@ -22,6 +22,8 @@
     "sendgrid": "~0.4.6",
     "twit": "~1.1.12",
     "underscore": "~1.5.2",
-    "mail-listener": "~0.7.1"
+    "mail-listener": "~0.7.1",
+    "imap": "*",
+    "mailparser": "*"
   }
 }
