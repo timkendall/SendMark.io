@@ -56,7 +56,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(expressValidator());
 app.use(express.methodOverride());
-app.use(express.session({ secret: 'your secret code' }));
+app.use(express.session({ secret: 'dsdas dadsf asdfwerf3424392c 2' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
@@ -64,7 +64,6 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(flash());
-app.use(less({ src: __dirname + '/public', compress: true }));
 app.use(app.router);
 app.use(express.static( path.join(__dirname, 'public'), { maxAge: 864000000 } ));
 app.use(function(req, res) {
@@ -90,16 +89,10 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/api', apiController.getApi);
-app.get('/api/foursquare', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getFoursquare);
-app.get('/api/tumblr', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getTumblr);
 app.get('/api/facebook', passportConf.isAuthenticated, apiController.getFacebook);
 app.get('/api/scraping', apiController.getScraping);
 app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getGithub);
-app.get('/api/lastfm', apiController.getLastfm);
-app.get('/api/nyt', apiController.getNewYorkTimes);
 app.get('/api/twitter', passportConf.isAuthenticated, apiController.getTwitter);
-app.get('/api/aviary', apiController.getAviary);
-app.get('/api/paypal', apiController.getPayPal);
 app.get('/api/paypal/success', apiController.getPayPalSuccess);
 app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
@@ -110,10 +103,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: 'profile email'
 app.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
-app.get('/auth/foursquare', passport.authorize('foursquare'));
-app.get('/auth/foursquare/callback', passport.authorize('foursquare', { failureRedirect: '/api' }), function(req, res) { res.redirect('/api/foursquare'); });
-app.get('/auth/tumblr', passport.authorize('tumblr'));
-app.get('/auth/tumblr/callback', passport.authorize('tumblr', { failureRedirect: '/api' }), function(req, res) { res.redirect('/api/tumblr'); });
+
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
