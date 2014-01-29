@@ -5,13 +5,8 @@ var async = require('async');
 var cheerio = require('cheerio');
 var request = require('request');
 var _ = require('underscore');
-var graph = require('fbgraph');
-var LastFmNode = require('lastfm').LastFmNode;
-var tumblr = require('tumblr.js');
-var foursquare = require('node-foursquare')({ secrets: secrets.foursquare });
 var Github = require('github-api');
 var Twit = require('twit');
-var paypal = require('paypal-rest-sdk');
 
 /**
  * GET /api

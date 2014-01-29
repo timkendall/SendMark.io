@@ -4,7 +4,6 @@
 
 var express = require('express');
 var flash = require('express-flash');
-var less = require('less-middleware');
 var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -93,8 +92,6 @@ app.get('/api/facebook', passportConf.isAuthenticated, apiController.getFacebook
 app.get('/api/scraping', apiController.getScraping);
 app.get('/api/github', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getGithub);
 app.get('/api/twitter', passportConf.isAuthenticated, apiController.getTwitter);
-app.get('/api/paypal/success', apiController.getPayPalSuccess);
-app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
 app.get('/auth/github', passport.authenticate('github'));
