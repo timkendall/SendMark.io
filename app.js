@@ -7,10 +7,8 @@ var flash = require('express-flash');
 var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
-//var MailListener = require("mail-listener");
+var MailListener = require("mail-listener2");
 var expressValidator = require('express-validator');
-var Imap = require('imap'),
-    inspect = require('util').inspect;
 
 
 /**
@@ -105,144 +103,49 @@ app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
 
 /**
- * Just a MailListener Test - will move!!!
- **/
-/*
+ * Mail Listener 2
+ */
+
+var MailListener = require("mail-listener2");
+
 var mailListener = new MailListener({
   username: "sendmarkadd@gmail.com",
   password: "thisisatest!",
   host: "imap.gmail.com",
   port: 993, // imap port
-  secure: true, // use secure connection
+  tls: true,
+  tlsOptions: { rejectUnauthorized: false },
   mailbox: "INBOX", // mailbox to monitor
   markSeen: true, // all fetched email willbe marked as seen and not fetched next time
-  fetchUnreadOnStart: true // use it only if you want to get all unread email on lib start. Default is `false`
+  fetchUnreadOnStart: true, // use it only if you want to get all unread email on lib start. Default is `false`,
+  mailParserOptions: {streamAttachments: true} // options to be passed to mailParser lib.
 });
 
-mailListener.start();
+mailListener.start(); // start listening
+
+// stop listening
+//mailListener.stop();
 
 mailListener.on("server:connected", function(){
   console.log("imapConnected");
 });
 
-mailListener.on("mail:arrived", function(id){
-  console.log("new mail arrived with id:" + id);
+mailListener.on("server:disconnected", function(){
+  console.log("imapDisconnected");
 });
 
-mailListener.on("mail:parsed", function(mail){
-  // do something with mail object including attachments
-  console.log("emailParsed", mail.attachments);
-  // mail processing code goes here
-});
-*/
-
-/**
- * Just a node IMAP test - will move!!!
- **/
-
- var imap = new Imap({
-  user: 'sendmarkadd@gmail.com',
-  password: 'thisisatest!',
-  host: 'imap.gmail.com',
-  port: 993,
-  tls: true,
-  tlsOptions: { rejectUnauthorized: false }
-});
-
-function openInbox(cb) {
-  imap.openBox('INBOX', true, cb);
-}
-imap.once('ready', function() {
-  openInbox(function(err, box) {
-
-    if (err) throw err;
-    /*
-    var f = imap.seq.fetch('1:3', {
-      bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
-      struct: true
-    });
-
-    f.on('message', function(msg, seqno) {
-      console.log('Message #%d', seqno);
-      var prefix = '(#' + seqno + ') ';
-      msg.on('body', function(stream, info) {
-        var buffer = '';
-        stream.on('data', function(chunk) {
-          buffer += chunk.toString('utf8');
-        });
-        stream.once('end', function() {
-          console.log(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
-        });
-      });
-      msg.once('attributes', function(attrs) {
-        console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
-      });
-      msg.once('end', function() {
-        console.log(prefix + 'Finished');
-      });
-    });
-
-    f.once('error', function(err) {
-      console.log('Fetch error: ' + err);
-    });
-
-    f.once('end', function() {
-      console.log('Done fetching all messages!');
-      imap.end();
-    });
-    */
-
-    imap.on('mail', function(seqno) {
-        console.log("New mail!: " + seqno);
-
-        var f = imap.seq.fetch(box.messages.total + ':*', {
-          bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
-          markSeen: true,
-          struct: true
-        });
-
-        f.on('message', function(msg, seqno) {
-          console.log('Message #%d', seqno);
-          var prefix = '(#' + seqno + ') ';
-          msg.on('body', function(stream, info) {
-            var buffer = '';
-            stream.on('data', function(chunk) {
-              buffer += chunk.toString('utf8');
-            });
-            stream.once('end', function() {
-              console.log(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
-            });
-          });
-          msg.once('attributes', function(attrs) {
-            console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
-          });
-          msg.once('end', function() {
-            console.log(prefix + 'Finished');
-          });
-        });
-
-        f.once('error', function(err) {
-          console.log('Fetch error: ' + err);
-        });
-
-        f.once('end', function() {
-          console.log('Done fetching all messages!');
-          imap.end();
-        });
-    });
-
-  });
-});
-
-imap.once('error', function(err) {
+mailListener.on("error", function(err){
   console.log(err);
 });
 
-imap.once('end', function() {
-  console.log('Connection ended');
+mailListener.on("mail", function(mail){
+  // do something with mail object including attachments
+  console.log("From:", mail.from);
+  console.log("Subject:", mail.subject);
+  console.log("Body:", mail.text);
+  // mail processing code goes here
 });
 
-imap.connect();
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
