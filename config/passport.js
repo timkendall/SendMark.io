@@ -1,200 +1,207 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var OAuthStrategy = require('passport-oauth').OAuthStrategy;
-var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-var TwitterStrategy = require('passport-twitter').Strategy;
-var GitHubStrategy = require('passport-github').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var User = require('../models/User');
-var secrets = require('./secrets');
-var _ = require('underscore');
+'use strict';
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+var mongoose = require('mongoose'),
+    LocalStrategy = require('passport-local').Strategy,
+    TwitterStrategy = require('passport-twitter').Strategy,
+    FacebookStrategy = require('passport-facebook').Strategy,
+    GitHubStrategy = require('passport-github').Strategy,
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+    LinkedinStrategy = require('passport-linkedin').Strategy,
+    User = mongoose.model('User'),
+    config = require('./config');
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
-});
 
-passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
-  User.findOne({ email: email }, function(err, user) {
-    if (!user) return done(null, false, { message: 'Email ' + email + ' not found'});
-    user.comparePassword(password, function(err, isMatch) {
-      if (isMatch) {
-        return done(null, user);
-      } else {
-        return done(null, false, { message: 'Invalid email or password.' });
-      }
+module.exports = function(passport) {
+    
+    // Serialize the user id to push into the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
     });
-  });
-}));
 
-passport.use(new FacebookStrategy(secrets.facebook, function (req, accessToken, refreshToken, profile, done) {
-  if (req.user) {
-    User.findById(req.user.id, function(err, user) {
-      user.facebook = profile.id;
-      user.tokens.push({ kind: 'facebook', accessToken: accessToken });
-      user.profile.name = user.profile.name || profile.displayName;
-      user.profile.gender = user.profile.gender || profile._json.gender;
-      user.profile.picture = user.profile.picture || profile._json.profile_image_url;
-      user.save(function(err) {
-        done(err, user);
-      });
+    // Deserialize the user object based on a pre-serialized token
+    // which is the user id
+    passport.deserializeUser(function(id, done) {
+        User.findOne({
+            _id: id
+        }, '-salt -hashed_password', function(err, user) {
+            done(err, user);
+        });
     });
-  } else {
-    User.findOne({ facebook: profile.id }, function(err, existingUser) {
-      if (existingUser) return done(null, existingUser);
-      var user = new User();
-      user.email = profile._json.email;
-      user.facebook = profile.id;
-      user.tokens.push({ kind: 'facebook', accessToken: accessToken });
-      user.profile.name = profile.displayName;
-      user.profile.gender = profile._json.gender;
-      user.profile.picture = profile._json.profile_image_url;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  }
-}));
 
-passport.use(new GitHubStrategy(secrets.github, function(req, accessToken, refreshToken, profile, done) {
-  if (req.user) {
-    User.findById(req.user.id, function(err, user) {
-      user.github = profile.id;
-      user.tokens.push({ kind: 'github', accessToken: accessToken });
-      user.profile.name = user.profile.name || profile.displayName;
-      user.profile.picture = user.profile.picture || profile._json.avatar_url;
-      user.profile.location = user.profile.location || profile._json.location;
-      user.profile.website = user.profile.website || profile._json.blog;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  } else {
-    User.findOne({ github: profile.id }, function(err, existingUser) {
-      if (existingUser) return done(null, existingUser);
-      var user = new User();
-      user.email = profile._json.email;
-      user.github = profile.id;
-      user.tokens.push({ kind: 'github', accessToken: accessToken });
-      user.profile.name = profile.displayName;
-      user.profile.picture = profile._json.avatar_url;
-      user.profile.location = profile._json.location;
-      user.profile.website = profile._json.blog;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  }
-}));
+    // Use local strategy
+    passport.use(new LocalStrategy({
+            usernameField: 'email',
+            passwordField: 'password'
+        },
+        function(email, password, done) {
+            User.findOne({
+                email: email
+            }, function(err, user) {
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false, {
+                        message: 'Unknown user'
+                    });
+                }
+                if (!user.authenticate(password)) {
+                    return done(null, false, {
+                        message: 'Invalid password'
+                    });
+                }
+                return done(null, user);
+            });
+        }
+    ));
 
-passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tokenSecret, profile, done) {
-  if (req.user) {
-    User.findById(req.user.id, function(err, user) {
-      user.twitter = profile.id;
-      user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
-      user.profile.name = user.profile.name || profile.displayName;
-      user.profile.location = user.profile.location || profile._json.location;
-      user.profile.picture = user.profile.picture || profile._json.profile_image_url;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  } else {
-    User.findOne({ twitter: profile.id }, function(err, existingUser) {
-      if (existingUser) return done(null, existingUser);
-      var user = new User();
-      user.email = profile.displayName;
-      user.twitter = profile.id;
-      user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
-      user.profile.name = profile.displayName;
-      user.profile.location = profile._json.location;
-      user.profile.picture = profile._json.profile_image_url;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  }
-}));
+    // Use twitter strategy
+    passport.use(new TwitterStrategy({
+            consumerKey: config.twitter.clientID,
+            consumerSecret: config.twitter.clientSecret,
+            callbackURL: config.twitter.callbackURL
+        },
+        function(token, tokenSecret, profile, done) {
+            User.findOne({
+                'twitter.id_str': profile.id
+            }, function(err, user) {
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    user = new User({
+                        name: profile.displayName,
+                        username: profile.username,
+                        provider: 'twitter',
+                        twitter: profile._json
+                    });
+                    user.save(function(err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
+                } else {
+                    return done(err, user);
+                }
+            });
+        }
+    ));
 
-passport.use(new GoogleStrategy(secrets.google, function(req, accessToken, refreshToken, profile, done) {
-  if (req.user) {
-    User.findById(req.user.id, function(err, user) {
-      user.google = profile.id;
-      user.tokens.push({ kind: 'google', accessToken: accessToken });
-      user.profile.name = user.profile.name || profile.displayName;
-      user.profile.gender = user.profile.gender || profile._json.gender;
-      user.profile.picture = user.profile.picture || profile._json.picture;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  } else {
-    User.findOne({ google: profile.id }, function(err, existingUser) {
-      if (existingUser) return done(null, existingUser);
-      var user = new User();
-      user.email = profile._json.email;
-      user.google = profile.id;
-      user.tokens.push({ kind: 'google', accessToken: accessToken });
-      user.profile.name = profile.displayName;
-      user.profile.gender = profile._json.gender;
-      user.profile.picture = profile._json.picture;
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  }
-}));
+    // Use facebook strategy
+    passport.use(new FacebookStrategy({
+            clientID: config.facebook.clientID,
+            clientSecret: config.facebook.clientSecret,
+            callbackURL: config.facebook.callbackURL
+        },
+        function(accessToken, refreshToken, profile, done) {
+            User.findOne({
+                'facebook.id': profile.id
+            }, function(err, user) {
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    user = new User({
+                        name: profile.displayName,
+                        email: profile.emails[0].value,
+                        username: profile.username,
+                        provider: 'facebook',
+                        facebook: profile._json
+                    });
+                    user.save(function(err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
+                } else {
+                    return done(err, user);
+                }
+            });
+        }
+    ));
 
-passport.use('tumblr', new OAuthStrategy({
-    requestTokenURL: 'http://www.tumblr.com/oauth/request_token',
-    accessTokenURL: 'http://www.tumblr.com/oauth/access_token',
-    userAuthorizationURL: 'http://www.tumblr.com/oauth/authorize',
-    consumerKey: secrets.tumblr.consumerKey,
-    consumerSecret: secrets.tumblr.consumerSecret,
-    callbackURL: secrets.tumblr.callbackURL,
-    passReqToCallback: true
-  },
-  function (req, token, tokenSecret, profile, done) {
-    User.findById(req.user._id, function(err, user) {
-      user.tokens.push({ kind: 'tumblr', accessToken: token, tokenSecret: tokenSecret });
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  }
-));
+    // Use github strategy
+    passport.use(new GitHubStrategy({
+            clientID: config.github.clientID,
+            clientSecret: config.github.clientSecret,
+            callbackURL: config.github.callbackURL
+        },
+        function(accessToken, refreshToken, profile, done) {
+            User.findOne({
+                'github.id': profile.id
+            }, function(err, user) {
+                if (!user) {
+                    user = new User({
+                        name: profile.displayName,
+                        email: profile.emails[0].value,
+                        username: profile.username,
+                        provider: 'github',
+                        github: profile._json
+                    });
+                    user.save(function(err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
+                } else {
+                    return done(err, user);
+                }
+            });
+        }
+    ));
 
-passport.use('foursquare', new OAuth2Strategy({
-    authorizationURL: 'https://foursquare.com/oauth2/authorize',
-    tokenURL: 'https://foursquare.com/oauth2/access_token',
-    clientID: secrets.foursquare.clientId,
-    clientSecret: secrets.foursquare.clientSecret,
-    callbackURL: secrets.foursquare.redirectUrl,
-    passReqToCallback: true
-  },
-  function (req, accessToken, refreshToken, profile, done) {
-    User.findById(req.user._id, function(err, user) {
-      user.tokens.push({ kind: 'foursquare', accessToken: accessToken });
-      user.save(function(err) {
-        done(err, user);
-      });
-    });
-  }
-));
+    // Use google strategy
+    passport.use(new GoogleStrategy({
+            clientID: config.google.clientID,
+            clientSecret: config.google.clientSecret,
+            callbackURL: config.google.callbackURL
+        },
+        function(accessToken, refreshToken, profile, done) {
+            User.findOne({
+                'google.id': profile.id
+            }, function(err, user) {
+                if (!user) {
+                    user = new User({
+                        name: profile.displayName,
+                        email: profile.emails[0].value,
+                        username: profile.username,
+                        provider: 'google',
+                        google: profile._json
+                    });
+                    user.save(function(err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
+                } else {
+                    return done(err, user);
+                }
+            });
+        }
+    ));
 
-exports.isAuthenticated = function(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/login');
-};
-
-exports.isAuthorized = function(req, res, next) {
-  var provider = req.path.split('/').slice(-1)[0];
-  if (_.findWhere(req.user.tokens, { kind: provider })) next();
-  else res.redirect('/auth/' + provider);
+    // use linkedin strategy
+    passport.use(new LinkedinStrategy({
+            consumerKey: config.linkedin.clientID,
+            consumerSecret: config.linkedin.clientSecret,
+            callbackURL: config.linkedin.callbackURL,
+            profileFields: ['id', 'first-name', 'last-name', 'email-address']
+        },
+        function(accessToken, refreshToken, profile, done) {
+          User.findOne({ 
+                'linkedin.id': profile.id 
+            }, function (err, user) {
+                if (!user) {
+                    user = new User({
+                        name: profile.displayName,
+                        email: profile.emails[0].value,
+                        username: profile.emails[0].value,
+                        provider: 'linkedin'
+                    });
+                    user.save(function (err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
+                } else {
+                    return done(err, user)
+                }
+            });
+        }
+    ));
 };
