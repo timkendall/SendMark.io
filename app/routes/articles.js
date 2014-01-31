@@ -15,10 +15,10 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(app) {
 
     app.get('/articles', articles.all);
-    app.post('/articles', authorization.requiresLogin, articles.create);
+    app.post('/articles', authorization.ensureAuthenticated, articles.create);
     app.get('/articles/:articleId', articles.show);
-    app.put('/articles/:articleId', authorization.requiresLogin, hasAuthorization, articles.update);
-    app.del('/articles/:articleId', authorization.requiresLogin, hasAuthorization, articles.destroy);
+    app.put('/articles/:articleId', authorization.ensureAuthenticated, hasAuthorization, articles.update);
+    app.del('/articles/:articleId', authorization.ensureAuthenticated, hasAuthorization, articles.destroy);
 
     // Finish with setting up the articleId param
     app.param('articleId', articles.article);

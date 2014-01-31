@@ -2,75 +2,46 @@
 
 // User routes use users controller
 var users = require('../controllers/users');
+var authorization = require('./middlewares/authorization');
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, UserApp) {
 
-    app.get('/signin', users.signin);
-    app.get('/signup', users.signup);
-    app.get('/signout', users.signout);
-    app.get('/users/me', users.me);
+  app.get('/account', authorization.ensureAuthenticated, users.account);
+  app.get('/signin', users.signin);
+  app.get('/signup', users.signup);
+  app.get('/signout', users.signout);
 
-    // Setting up the users api
-    app.post('/users', users.create);
+  // Setting up the users api
+  app.post('/signup',
+    function createUser(req, res, next){
+      // the HTML form names are conveniently named the same as
+      // the UserApp fields...
+      var user = req.body;
 
-    // Setting up the userId param
-    app.param('userId', users.user);
+      // Create the user in UserApp
+      UserApp.User.save(user, function(err, user){
 
-    // Setting the local strategy route
-    app.post('/users/session', passport.authenticate('local', {
-        failureRedirect: '/signin',
-        failureFlash: true
-    }), users.session);
+      // We can just pass through messages like "Password must be at least 5 characters." etc.
+      if (err) return res.render('signup', {user: false, message: err.message});
 
-    // Setting the facebook oauth routes
-    app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: ['email', 'user_about_me'],
-        failureRedirect: '/signin'
-    }), users.signin);
+        // UserApp passport needs a username parameter
+        req.body.username = req.body.login;
 
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
+        //on to authentication
+        next();
+      });
+    },  passport.authenticate('userapp', { failureRedirect: '/signup', failureFlash: 'Error logging in user' }),
 
-    // Setting the github oauth routes
-    app.get('/auth/github', passport.authenticate('github', {
-        failureRedirect: '/signin'
-    }), users.signin);
+    function serveAccount(req, res, next){
+      // console.log(req.user);
+      res.redirect('/');
+  });
 
-    app.get('/auth/github/callback', passport.authenticate('github', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
-
-    // Setting the twitter oauth routes
-    app.get('/auth/twitter', passport.authenticate('twitter', {
-        failureRedirect: '/signin'
-    }), users.signin);
-
-    app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
-
-    // Setting the google oauth routes
-    app.get('/auth/google', passport.authenticate('google', {
-        failureRedirect: '/signin',
-        scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-        ]
-    }), users.signin);
-
-    app.get('/auth/google/callback', passport.authenticate('google', {
-        failureRedirect: '/signin'
-    }), users.authCallback);
-
-    // Setting the linkedin oauth routes
-    app.get('/auth/linkedin', passport.authenticate('linkedin', {
-        failureRedirect: '/signin',
-        scope: [ 'r_emailaddress' ]
-    }), users.signin);
-
-    app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-        failureRedirect: '/siginin'
-    }), users.authCallback);
+  app.post('/login',
+    passport.authenticate('userapp', { failureRedirect: '/login', failureFlash: 'Invalid username or password.'}),
+    function (req, res) {
+        res.redirect('/');
+     }
+   );
 
 };
