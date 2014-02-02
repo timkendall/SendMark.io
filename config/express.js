@@ -68,10 +68,11 @@ module.exports = function(app, passport, db) {
 
         // Routes should be at the last
         app.use(app.router);
-        
+
         // Setting the fav icon and static folder
         app.use(express.favicon());
         app.use(express.static(config.root + '/public'));
+        app.use('/lib', express.static(config.root + '/app/components'));
 
         // Assume "not found" in the error msgs is a 404. this is somewhat
         // silly, but valid, you can do whatever you like, set properties,

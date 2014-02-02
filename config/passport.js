@@ -2,22 +2,28 @@
 
 var mongoose = require('mongoose'),
     UserAppStrategy = require('passport-userapp').Strategy,
-    config = require('./config');
+    config = require('./config'),
+    _ = require('lodash');
 
 
-module.exports = function(passport, UserApp) {
+module.exports = function(passport, UserApp, users) {
 
-    var users = [];
+    //var users = [];
 
     // Initialzie UserApp
     UserApp.initialize({ appId: config.userapp.clientID });
 
     // Passport session setup
     passport.serializeUser(function(user, done) {
+      console.log("serializing user " + user);
+
       done(null, user.username);
     });
 
-    passport.deserializeUser(function(id, done) {
+    passport.deserializeUser(function(username, done) {
+
+      console.log("deserializing user " + username);
+
       var user = _.find(users, function (user) {
         return user.username == username;
       });
@@ -34,6 +40,9 @@ module.exports = function(passport, UserApp) {
         appId: config.userapp.clientID
       },
       function (userprofile, done) {
+
+        console.log("userprofile: " + userprofile);
+
         process.nextTick(function () {
           var exists = _.any(users, function (user) {
             return user.id == userprofile.id;

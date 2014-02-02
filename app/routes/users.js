@@ -1,15 +1,15 @@
 'use strict';
 
 // User routes use users controller
-var users = require('../controllers/users');
+var usersC = require('../controllers/users');
 var authorization = require('./middlewares/authorization');
 
-module.exports = function(app, passport, UserApp) {
+module.exports = function(app, passport, UserApp, users) {
 
-  app.get('/account', authorization.ensureAuthenticated, users.account);
-  app.get('/signin', users.signin);
-  app.get('/signup', users.signup);
-  app.get('/signout', users.signout);
+  app.get('/account', authorization.ensureAuthenticated, usersC.account);
+  app.get('/signin', usersC.signin);
+  app.get('/signup', usersC.signup);
+  app.get('/signout', usersC.signout);
 
   // Setting up the users api
   app.post('/signup',
@@ -21,14 +21,14 @@ module.exports = function(app, passport, UserApp) {
       // Create the user in UserApp
       UserApp.User.save(user, function(err, user){
 
-      // We can just pass through messages like "Password must be at least 5 characters." etc.
-      if (err) return res.render('signup', {user: false, message: err.message});
+        // We can just pass through messages like "Password must be at least 5 characters." etc.
+        if (err) return res.render('users/signup', {user: false, message: err.message});
 
-        // UserApp passport needs a username parameter
-        req.body.username = req.body.login;
+          // UserApp passport needs a username parameter
+          req.body.username = req.body.login;
 
-        //on to authentication
-        next();
+          //on to authentication
+          next();
       });
     },  passport.authenticate('userapp', { failureRedirect: '/signup', failureFlash: 'Error logging in user' }),
 
@@ -37,8 +37,8 @@ module.exports = function(app, passport, UserApp) {
       res.redirect('/');
   });
 
-  app.post('/login',
-    passport.authenticate('userapp', { failureRedirect: '/login', failureFlash: 'Invalid username or password.'}),
+  app.post('/signin',
+    passport.authenticate('userapp', { failureRedirect: '/signin', failureFlash: 'Invalid username or password.'}),
     function (req, res) {
         res.redirect('/');
      }

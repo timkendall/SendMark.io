@@ -13,6 +13,7 @@ var express = require('express'),
  * Main application entry file.
  * Please note that the order of loading is important.
  */
+ var users =[];
 
 // Load configurations
 // Set the node enviornment variable if not set before
@@ -43,7 +44,7 @@ var walk = function(path) {
 walk(models_path);
 
 // Bootstrap passport config
-require('./config/passport')(passport, UserApp);
+require('./config/passport')(passport, UserApp, users);
 
 var app = express();
 
@@ -58,7 +59,7 @@ var walk = function(path) {
         var stat = fs.statSync(newPath);
         if (stat.isFile()) {
             if (/(.*)\.(js$|coffee$)/.test(file)) {
-                require(newPath)(app, passport, UserApp);
+                require(newPath)(app, passport, UserApp, users);
             }
         // We skip the app/routes/middlewares directory as it is meant to be
         // used and shared by routes as further middlewares and is not a
