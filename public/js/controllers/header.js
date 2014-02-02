@@ -4,11 +4,11 @@ angular.module('SendMark.system').controller('HeaderController', ['$scope', 'Glo
     $scope.global = Global;
 
     $scope.menu = [{
-        'title': 'Articles',
-        'link': 'articles'
+        'title': 'Lists',
+        'link': 'lists'
     }, {
-        'title': 'Create New Article',
-        'link': 'articles/create'
+        'title': 'Create New List',
+        'link': 'lists/create'
     }];
 
     $scope.isCollapsed = false;

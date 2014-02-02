@@ -14,7 +14,9 @@ var hasAuthorization = function(req, res, next) {
 
 module.exports = function(app) {
 
+    // Show all of current users lists
     app.get('/lists', lists.all);
+
     app.post('/lists', authorization.ensureAuthenticated, lists.create);
     app.get('/lists/:listId', lists.show);
     app.put('/lists/:listId', authorization.ensureAuthenticated, hasAuthorization, lists.update);

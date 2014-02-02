@@ -77,6 +77,13 @@ ListSchema.methods = {
 /**
  * Statics
  */
+
+ListSchema.statics.loadAllOfUsers = function(user, cb) {
+    this.find({
+        creator: user._id
+    }).populate('creator', 'name username').exec(cb);
+};
+
 ListSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id

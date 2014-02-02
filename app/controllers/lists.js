@@ -7,6 +7,19 @@ var mongoose = require('mongoose'),
     List = mongoose.model('List'),
     _ = require('lodash');
 
+/**
+ * Load all of a users lists
+ */
+exports.all = function(req, res, next, id) {
+    console.log("req.user"+req.user);
+
+    List.loadAllOfUsers(req.user, function(err, lists) {
+        if (err) return next(err);
+        if (!lists) return next(new Error('Failed to load lists.'));
+        req.lists = lists;
+        next();
+    });
+};
 
 /**
  * Find list by id
@@ -26,6 +39,8 @@ exports.list = function(req, res, next, id) {
 exports.create = function(req, res) {
     var list = new List(req.body);
     list.creator = req.user._id;
+
+    console.log("Creating list for " + req.user);
 
     list.save(function(err) {
         if (err) {
