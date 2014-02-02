@@ -7,7 +7,6 @@ var flash = require('express-flash');
 var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var MailListener = require("mail-listener2");
 var expressValidator = require('express-validator');
 
 
@@ -19,6 +18,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var emailController = require('./controllers/email');
 
 /**
  * API keys + Passport configuration.
@@ -106,45 +106,13 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedi
  * Mail Listener 2
  */
 
-var MailListener = require("mail-listener2");
-
-var mailListener = new MailListener({
-  username: "sendmarkadd@gmail.com",
-  password: "thisisatest!",
-  host: "imap.gmail.com",
-  port: 993, // imap port
-  tls: true,
-  tlsOptions: { rejectUnauthorized: false },
-  mailbox: "INBOX", // mailbox to monitor
-  markSeen: true, // all fetched email willbe marked as seen and not fetched next time
-  fetchUnreadOnStart: true, // use it only if you want to get all unread email on lib start. Default is `false`,
-  mailParserOptions: {streamAttachments: true} // options to be passed to mailParser lib.
-});
-
-mailListener.start(); // start listening
+emailController.configListener();
+emailController.start();
 
 // stop listening
 //mailListener.stop();
 
-mailListener.on("server:connected", function(){
-  console.log("imapConnected");
-});
 
-mailListener.on("server:disconnected", function(){
-  console.log("imapDisconnected");
-});
-
-mailListener.on("error", function(err){
-  console.log(err);
-});
-
-mailListener.on("mail", function(mail){
-  // do something with mail object including attachments
-  console.log("From:", mail.from);
-  console.log("Subject:", mail.subject);
-  console.log("Body:", mail.text);
-  // mail processing code goes here
-});
 
 
 app.listen(app.get('port'), function() {
