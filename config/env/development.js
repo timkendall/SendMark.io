@@ -1,9 +1,12 @@
 'use strict';
 
 module.exports = {
-    db: "mongodb://localhost/mean-dev",
+    db: "mongodb://localhost/sendmark-dev",
     app: {
-        name: "MEAN - A Modern Stack - Development"
+        name: "SendMark - Development"
+    },
+    userapp: {
+        clientID: "52e93bb22f2fa"
     },
     facebook: {
         clientID: "APP_ID",

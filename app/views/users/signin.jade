@@ -1,11 +1,11 @@
 extends auth
 
 block auth
-  form.signin.form-horizontal(action="/users/session", method="post")
+  form.signin.form-horizontal(action="/signin", method="post")
     .form-group
-      label.col-md-4.control-label(for='email') Email
+      label.col-md-4.control-label(for='username') Username
       .col-md-8
-        input#email.form-control(type='text', name="email", placeholder='Email')
+        input#email.form-control(type='text', name="username", placeholder='Username')
 
     .form-group
       label.col-md-4.control-label(for='password') Password
@@ -14,7 +14,7 @@ block auth
 
     .form-group
       .col-md-offset-4.col-md-8
-        button.btn.btn-primary(type='submit') Sign in
+        button.btn.btn-primary(type='submit', value='Submit') Sign in
         &nbsp;
         | or&nbsp;
         a.show-signup(href="/signup") Sign up

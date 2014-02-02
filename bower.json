@@ -1,5 +1,5 @@
 {
-    "name": "mean",
+    "name": "SendMark",
     "version": "0.1.3",
     "dependencies": {
         "angular": "1.2.10",

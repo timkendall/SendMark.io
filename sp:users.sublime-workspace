@@ -1,0 +1,731 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Favor",
+				"FavoriteSchema"
+			],
+			[
+				"light",
+				"light-grey-color"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"check",
+				"checkbox"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"borde",
+				"border-right"
+			],
+			[
+				"fle",
+				"flex-end"
+			],
+			[
+				"a",
+				"absolute"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"ma",
+				"margin-top"
+			],
+			[
+				"marg",
+				"margin-right"
+			],
+			[
+				"prim",
+				"primary-color"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"padd",
+				"padding-right"
+			],
+			[
+				"btn",
+				"btn-primary"
+			],
+			[
+				"paddin",
+				"padding-left"
+			],
+			[
+				"base",
+				"base-font-family"
+			],
+			[
+				"fotn",
+				"font-size"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"pr",
+				"primary-background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 2214,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/passport.js",
+			"settings":
+			{
+				"buffer_size": 1221,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/routes/users.js",
+			"settings":
+			{
+				"buffer_size": 1459,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/users.js",
+			"settings":
+			{
+				"buffer_size": 1770,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/express.js",
+			"settings":
+			{
+				"buffer_size": 3074,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/config.js",
+			"settings":
+			{
+				"buffer_size": 865,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/controllers/index.js",
+			"settings":
+			{
+				"buffer_size": 160,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/index.jade",
+			"settings":
+			{
+				"buffer_size": 124,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 374.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"isnt",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax cs",
+				"Set Syntax: CSS"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 475.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Me/Dropbox/Projects/SendMark.io/bower.json",
+		"/Users/Me/Dropbox/Projects/SendMark.io/app/views/includes/foot.jade",
+		"/Users/Me/Dropbox/Projects/SendMark.io/.gitignore",
+		"/Users/Me/Dropbox/Projects/SendMark.io/public/js/controllers/header.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/public/js/init.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/public/js/app.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/app/views/includes/head.jade",
+		"/Users/Me/Dropbox/Projects/SendMark.io/app/routes/articles.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/app/routes/index.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/app/routes/middlewares/authorization.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/package.json",
+		"/Users/Me/Dropbox/Projects/SendMark.io/config/env/test.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/config/env/production.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/config/env/development.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/config/env/all.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/README.md",
+		"/Users/Me/Dropbox/Projects/SendMark.io/config/secrets.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/config/passport.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/controllers/api.js",
+		"/Users/Me/Dropbox/Projects/SendMark.io/app.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/controllers/index.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/error.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/account.html",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/404.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/layouts/app.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/controllers/app.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/app.js",
+		"/Users/Me/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/Me/Dropbox/Projects/Favorites/app/controllers/main.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/app.html",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/app.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/config/routes.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/services/global.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/directives.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/services/lists.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/lists/create.html",
+		"/Users/Me/Dropbox/Projects/Favorites/bower.json",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/init.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/sidebar.html",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/users/me.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/lists/list.html",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/lists/view.html",
+		"/Users/Me/Dropbox/Projects/Favorites/app/models/List.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/lists/edit.html",
+		"/Users/Me/Dropbox/Projects/Favorites/app/controllers/lists.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/users/signin.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/partials/_figures.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/controllers/index.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/controllers/users.js",
+		"/Users/Me/Dropbox/Projects/Favorites/config/middlewares/authorization.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/models/Favorite.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/models/User.js",
+		"/Users/Me/Dropbox/Projects/Favorites/config/passport.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/components/adaptive.background/src/jquery.adaptive-backgrounds.js",
+		"/Users/Me/Dropbox/Projects/Favorites/config/express.js",
+		"/Users/Me/Dropbox/Projects/Favorites/server.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/filters.js",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/config.js",
+		"/Users/Me/Dropbox/Projects/Favorites/config/env/production.json",
+		"/Users/Me/Dropbox/Projects/Favorites/config/env/development.json",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/partials/_base.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/layouts/dialogs.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/account.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/login.html",
+		"/Users/Me/Dropbox/Projects/Favorites/package.json",
+		"/Users/Me/Dropbox/Projects/Favorites/app/controllers/app.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/includes/head.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/app/controllers/partials.js",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/partials/_buttons.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/partials/_typography.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/app.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/modules/_colors.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/public/views/index.html",
+		"/Users/Me/Dropbox/Projects/Favorites/app/components/Font-Awesome/scss/_larger.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/components/Font-Awesome/scss/_variables.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/partials/_reset.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/partials/_grids.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/modules/_all.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/modules/_base.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/modules/_utility.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/_colors.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/colors.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/layouts/default.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/index.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/includes/foot.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/public/js/controllers/main.js",
+		"/Users/Me/Dropbox/Projects/Favorites/gruntfile.js",
+		"/Users/Me/Dropbox/Projects/Favorites/config.rb",
+		"/Users/Me/Dropbox/Projects/Favorites/public/styles/app.css",
+		"/Users/Me/.Trash/test 3.27.13 PM/sass/screen.scss",
+		"/Users/Me/.Trash/test 3.27.13 PM/sass/print.scss",
+		"/Users/Me/.Trash/test 3.27.13 PM/sass/ie.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/styles/config.rb",
+		"/Users/Me/Desktop/test/sass/screen.scss",
+		"/Users/Me/Desktop/test/sass/print.scss",
+		"/Users/Me/Desktop/test/sass/ie.scss",
+		"/Users/Me/Dropbox/Projects/Favorites/app/views/500.jade",
+		"/Users/Me/Dropbox/Projects/Favorites/node_modules/grunt-contrib-compass/tasks/compass.js",
+		"/Users/Me/Dropbox/Projects/Favorites/README.md",
+		"/Users/Me/Dropbox/Projects/Favorites/.gitignore",
+		"/Users/Me/Dropbox/Projects/Favorites/App/Favorites/app/styles/main.css",
+		"/Users/Me/Desktop/script.sh",
+		"/Users/Me/Desktop/server.properties",
+		"/Users/Me/Dropbox/Projects/Favorites/Alpha/App/views/index.ejs",
+		"/Users/Me/Dropbox/Projects/Favorites/Alpha/App/server.js",
+		"/Users/Me/Dropbox/Projects/Favorites/Alpha/App/app.js",
+		"/Users/Me/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"mean",
+			"requiresLogin",
+			"passport",
+			"replace",
+			"article",
+			"articles",
+			"article",
+			"articles",
+			"<"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"SendMark",
+			"ensureAuthenticated",
+			"list",
+			"lists",
+			"list",
+			"lists"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1614,
+								1621
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
+						},
+						"translation.x": 0.0,
+						"translation.y": 718.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "config/passport.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1221,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1209,
+								1209
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/routes/users.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1459,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								393,
+								393
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/controllers/users.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1770,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								790,
+								1310
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
+						},
+						"translation.x": 0.0,
+						"translation.y": 713.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "config/express.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3074,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2172,
+								2172
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 31.0,
+						"translation.y": 829.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "public/js/config.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 865,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50,
+								58
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/js/controllers/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35,
+								39
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 287.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/index.jade",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 124,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 110.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "sp:users.sublime-project",
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
