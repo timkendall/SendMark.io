@@ -6,6 +6,15 @@ var authorization = require('./middlewares/authorization');
 
 module.exports = function(app, passport, UserApp, users) {
 
+  /**
+   * Don't need this because we are using Angualr-UserApp to authenticate on front-end.
+   *
+   * Steps
+   * 1) API request from front-end, session token set with cookie.
+   * 2) Verify and cache cookie at back-end.
+   * 3) Fetch actual user from UserApp to use with back-end logic.
+   */
+/*
   app.get('/account', authorization.ensureAuthenticated, usersC.account);
   app.get('/signin', usersC.signin);
   app.get('/signup', usersC.signup);
@@ -43,5 +52,5 @@ module.exports = function(app, passport, UserApp, users) {
         res.redirect('/');
      }
    );
-
+*/
 };

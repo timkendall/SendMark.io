@@ -12,8 +12,8 @@ var mongoose = require('mongoose'),
 var ListSchema = new Schema({
     name: String,
     creator: {
-        type: Schema.ObjectId,
-        ref: 'User'
+        type: String, // UserApp user_id
+        required: true
     },
     created: {
         type: Date,
@@ -80,14 +80,14 @@ ListSchema.methods = {
 
 ListSchema.statics.loadAllOfUsers = function(user, cb) {
     this.find({
-        creator: user._id
-    }).populate('creator', 'name username').exec(cb);
+        creator: user.user_id
+    }).populate('items', 'url tags').exec(cb);
 };
 
 ListSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
-    }).populate('creator', 'name username').exec(cb);
+    }).populate('items', 'url tags').exec(cb);
 };
 
 mongoose.model('List', ListSchema);

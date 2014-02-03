@@ -15,14 +15,10 @@ module.exports = function(passport, UserApp, users) {
 
     // Passport session setup
     passport.serializeUser(function(user, done) {
-      console.log("serializing user " + user);
-
       done(null, user.username);
     });
 
     passport.deserializeUser(function(username, done) {
-
-      console.log("deserializing user " + username);
 
       var user = _.find(users, function (user) {
         return user.username == username;

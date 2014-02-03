@@ -38,7 +38,7 @@ exports.list = function(req, res, next, id) {
  */
 exports.create = function(req, res) {
     var list = new List(req.body);
-    list.creator = req.user._id;
+    list.creator = req.user.user_id; // Correct way to access UserApp user?
 
     console.log("Creating list for " + req.user);
 

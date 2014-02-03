@@ -12,15 +12,15 @@ var hasAuthorization = function(req, res, next) {
     next();
 };
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
     // Show all of current users lists
-    app.get('/lists', lists.all);
+    app.get('/lists', passport.authenticate('userapp'), lists.all);
 
-    app.post('/lists', authorization.ensureAuthenticated, lists.create);
+    app.post('/lists', passport.authenticate('userapp'), lists.create);
     app.get('/lists/:listId', lists.show);
-    app.put('/lists/:listId', authorization.ensureAuthenticated, hasAuthorization, lists.update);
-    app.del('/lists/:listId', authorization.ensureAuthenticated, hasAuthorization, lists.destroy);
+    app.put('/lists/:listId', passport.authenticate('userapp'), hasAuthorization, lists.update);
+    app.del('/lists/:listId', passport.authenticate('userapp'), hasAuthorization, lists.destroy);
 
     // Finish with setting up the listId param (i.e provide req.list to route)
     app.param('listId', lists.list);

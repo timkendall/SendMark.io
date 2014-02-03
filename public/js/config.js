@@ -4,6 +4,15 @@
 angular.module('SendMark').config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
+        when('/login', {
+            templateUrl: 'views/users/login.html',
+            public: true,
+            login: true
+        }).
+        when('/signup', {
+            templateUrl: 'views/users/signup.html',
+            public: true
+        }).
         when('/lists', {
             templateUrl: 'views/lists/all.html'
         }).
@@ -31,3 +40,8 @@ angular.module('SendMark').config(['$locationProvider',
         $locationProvider.hashPrefix('!');
     }
 ]);
+
+// Initialize UserApp
+angular.module('SendMark').run(function($rootScope, user) {
+    user.init({ appId: '52e93bb22f2fa' });
+});
