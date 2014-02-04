@@ -2,7 +2,7 @@
 	<ul class="lists unstyled">
 		<li data-ng-repeat="list in lists">
 			<span>{{list.created | date:'medium'}}</span> /
-			<span>{{list.user.name}}</span>
+			<span>{{list.creator.username}}</span>
 			<h2><a data-ng-href="#!/lists/{{list._id}}">{{list.name}}</a></h2>
 		</li>
 	</ul>

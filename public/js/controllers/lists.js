@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SendMark.lists').controller('ListsController', ['$scope', '$routeParams', '$location', 'Global', 'Lists', function ($scope, $routeParams, $location, Global, Lists) {
+angular.module('SendMark.lists').controller('ListsController', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', function ($scope, $routeParams, $location, $http, Global, Lists) {
     $scope.global = Global;
 
     $scope.create = function() {
@@ -43,10 +43,20 @@ angular.module('SendMark.lists').controller('ListsController', ['$scope', '$rout
     };
 
     $scope.find = function() {
-        console.log("Looking for lists...");
+
+        /*
         Lists.query(function(lists) {
             $scope.lists = lists.lists;
         });
+        */
+        $http({method: 'GET', url: '/lists'}).
+            success(function(data, status, headers, config) {
+                //The API call to the back-end was successful (i.e. a valid session)
+                $scope.lists = data;
+            }).
+            error(function(data, status, headers, config) {
+                alert("The API call to the back-end was NOT successful (i.e. an invalid session).");
+            });
     };
 
     $scope.findOne = function() {
