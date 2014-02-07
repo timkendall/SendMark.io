@@ -10,20 +10,28 @@ var mongoose = require('mongoose'),
  * User Schema
  */
 var UserSchema = new Schema({
-    provider: String,
-    id: {type: String, index: {unique: true, dropDups: true}},
-    username: String,
-    name: { familyName: String, givenName: String },
-    email: String,
-    emails: [ { value: String } ],
-    permissions: { permissionName: Boolean },
-    features: { featureName: Boolean },
-    properties: { propertyName: { value: Schema.Types.Mixed, override: Boolean } },
-    subscription: { price_list_id: String, plan_id: String, override: Boolean },
-    lastLoginAt: Date,
-    updatedAt: Date,
-    createdAt: Date,
-    _raw: { /* raw UserApp User profile */ }
+  _id: {type: String, index: {unique: true, dropDups: true}},
+  provider: String,
+  username: String,
+  name: { familyName: String, givenName: String },
+  email: String,
+  emails: [ { value: String } ],
+  permissions: { permissionName: Boolean },
+  features: { featureName: Boolean },
+  properties: { propertyName: { value: Schema.Types.Mixed, override: Boolean } },
+  subscription: { price_list_id: String, plan_id: String, override: Boolean },
+  lastLoginAt: Date,
+  updatedAt: Date,
+  createdAt: Date,
+  _raw: { /* raw UserApp User profile */ },
+  links: [{
+    type: Schema.ObjectId,
+    ref: 'Link'
+  }],
+  lists: [{
+    type: Schema.ObjectId,
+    ref: 'List'
+  }]
 });
 
 /**
@@ -68,7 +76,7 @@ UserSchema.methods = {
  */
 UserSchema.statics.load = function(id, cb) {
     this.findOne({
-        id: id
+        _id: id
     }).exec(cb);
 };
 /*

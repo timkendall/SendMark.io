@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
   _ = require('lodash');
 
 
-module.exports = function (passport, UserApp, users) {
+module.exports = function (passport, UserApp) {
 
-  //var users = [];
+
   // Initialzie UserApp
   UserApp.initialize({
     appId: config.userapp.clientID
@@ -24,7 +24,10 @@ module.exports = function (passport, UserApp, users) {
 
     User.load(id, function (err, user) {
       if (err) return done(err);
-      if (!user) return done(new Error('Failed to load user ' + id));
+      if (!user) {
+        //return done(new Error('Failed to load user ' + id));
+        console.log('Failed to load user (passport still has session going?) ' + id);
+      }
 
       done(null, user);
     });
@@ -39,6 +42,8 @@ module.exports = function (passport, UserApp, users) {
 
     process.nextTick(function () {
 
+      console.log("userprofile.id: " + userprofile.id);
+
       // See if userprofile exists locally
       User.load(userprofile.id, function createUpdateLocal(error, user) {
         if (error) done(new Error(error));
@@ -47,6 +52,7 @@ module.exports = function (passport, UserApp, users) {
           console.log('User doesnt exits locally, attempting to create.');
 
           var user = new User(userprofile);
+          user._id = userprofile.id;
 
           user.save(function (error) {
             if (error) {

@@ -1,0 +1,35 @@
+// imports for all mixins + global project variables
+
+// Use Compass
+//@import "compass";
+
+// Font weights
+$light: 300;
+$regular: 400;
+$semi-bold: 600;
+$bold: 700;
+$extra-bold: 900;
+
+// Base Font
+$base-font-family: sans-serif;
+$base-font-weight: $regular;
+$base-font-size: 13px;
+$base-line-height: 1.4;
+
+// Fixed Font
+$fixed-font-family: 'Source Sans Pro';
+$fixed-font-size: 85%;
+$fixed-line-height: $base-line-height;
+
+// Headings
+$header-font-weight: $bold;
+
+// Extra
+$sidebar-width: 225px;
+
+@import "modules/all";
+
+body {
+    font-family: $base-font-family;
+    color: $font-color;
+}

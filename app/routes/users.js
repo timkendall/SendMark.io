@@ -4,7 +4,7 @@
 var usersC = require('../controllers/users');
 var authorization = require('./middlewares/authorization');
 
-module.exports = function(app, passport, UserApp, users) {
+module.exports = function(app, passport) {
 
   /**
    * Don't need this because we are using Angualr-UserApp to authenticate on front-end.

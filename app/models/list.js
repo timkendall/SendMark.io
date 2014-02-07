@@ -58,6 +58,14 @@ ListSchema.pre('save', function(next) {
     else
         next();
 });
+/**
+ * Post-save hook
+ */
+
+ListSchema.post('save', function (doc) {
+  // Populate creatorUsername if empty
+});
+
 
 /**
  * Methods
@@ -73,7 +81,6 @@ ListSchema.methods = {
     findSimilarTypes: function(cb) {
         return this.model('List').find({ name: this.name }, cb);
     }
-
 };
 
 /**
