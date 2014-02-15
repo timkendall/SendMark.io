@@ -15,8 +15,9 @@ exports.authCallback = function(req, res) {
 /**
  * Show login form
  */
-exports.signin = function(req, res) {
-    res.render('users/signin', {
+exports.renderLogin = function(req, res) {
+    console.log('rendering login');
+    res.render('users/login', {
         user: req.user,
         message: req.flash('error')
     });
@@ -25,7 +26,7 @@ exports.signin = function(req, res) {
 /**
  * Show sign up form
  */
-exports.signup = function(req, res) {
+exports.renderSignup = function(req, res) {
     res.render('users/signup', {
         user: false,
         message:req.flash('error')

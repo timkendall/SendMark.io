@@ -62,21 +62,26 @@ LinkSchema.pre('save', function(next) {
   if (!validatePresenceOf(this.url))
     next(new Error('Missing link URL'));
 
+  var self = this;
+
+  if(!this.apartOfNames) next();
   // Populate _apartOf (list _id's)
-  var THIS = this;
   this.apartOfNames.forEach(function( listName, index, array ) {
-    mongoose.model('List').findOne( { name: listName, _creator: THIS._creator }, function( error, list ) {
+    mongoose.model('List').findOne( { name: listName, _creator: self._creator }, function( error, list ) {
       if(error) return console.log( error );
       // Create the list if it doesn't exist
       if( !list ) {
-        var list = new mongoose.model('List')({ name: listName, _creator: THIS._creator });
-        list.save(function(error) {
-          if(error) console.log( error );
+        console.log('here');
+        var list = new mongoose.model('List')({ name: listName, _creator: self._creator });
+
+        list.save(function( error, list ) {
+          if(error) console.log( '!!!!!!: ' + error );
+          else self._apartOf.push(list._id);
         });
       }
       console.log("Still doing foreach");
       // Push this list's _id to _apartOf
-      THIS._apartOf.push(list._id);
+      self._apartOf.push(list._id);
     });
   });
 

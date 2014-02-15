@@ -64,6 +64,8 @@ ListSchema.pre('save', function(next) {
 
 ListSchema.post('save', function (doc) {
   // Populate creatorUsername if empty
+
+  // Increment list count
 });
 
 

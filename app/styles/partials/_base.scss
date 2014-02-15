@@ -1,7 +1,7 @@
 // imports for all mixins + global project variables
 
-// Use Compass
-//@import "compass";
+// Use Bourbon
+@import 'bourbon';
 
 // Font weights
 $light: 300;
@@ -13,11 +13,11 @@ $extra-bold: 900;
 // Base Font
 $base-font-family: sans-serif;
 $base-font-weight: $regular;
-$base-font-size: 13px;
-$base-line-height: 1.4;
+$base-font-size: 14px;
+$base-line-height: 135%;
 
 // Fixed Font
-$fixed-font-family: 'Source Sans Pro';
+$fixed-font-family: 'Lato';
 $fixed-font-size: 85%;
 $fixed-line-height: $base-line-height;
 

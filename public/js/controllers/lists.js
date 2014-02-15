@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SendMark.lists').controller('ListsController', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', function ($scope, $routeParams, $location, $http, Global, Lists) {
+angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', function ($scope, $routeParams, $location, $http, Global, Lists) {
     $scope.global = Global;
 
     $scope.create = function() {

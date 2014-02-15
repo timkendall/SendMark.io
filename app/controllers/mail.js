@@ -6,9 +6,10 @@ var MailListener = require("mail-listener2"),
     User = mongoose.model('User'),
     List = mongoose.model('List'),
     Link = mongoose.model('Link'),
-    Mailman = require("sendmark-mailman");
+    SendMarkMailman = require("sendmark-mailman").Mailman;
 
 var mailListener;
+  Mailman = new SendMarkMailman();
 
 if (!String.prototype.trim) {
    //code for trim
@@ -45,7 +46,11 @@ exports.configListener = function(){
     console.log(err);
   });
 
-  mailListener.on("mail", function(mail){
+  mailListener.on("mail", function(mail) {
+    var links,
+      from,
+      subject,
+      body;
 
     /**
       * Parse Message
@@ -57,9 +62,16 @@ exports.configListener = function(){
 
     console.log("From:", mail.from);
     console.log("Subject:", mail.subject);
-    var from = mail.from[0].address;
-    var subject = mail.subject.split(',');
-    var body = mail.text;
+
+    from = mail.from[0].address;
+
+    if( typeof mail.subject === 'undefined' ) {
+      subject = "";
+    } else {
+      subject = mail.subject.split(',');
+    }
+
+    body = mail.text;
 
     /**
       * Generate List and Link Objects
@@ -80,10 +92,15 @@ exports.configListener = function(){
 
         console.log('Not user' + from);
       } else {
-
         // Extract links
-        var links = Mailman.extractLinks( user, subject, body);
+        links = Mailman.extractLinks( user, subject, body);
         console.log('Extracted links');
+        if(!links) return console.log( 'No links found');
+
+        // Print links to console
+        links.forEach(function( link, index, array ) {
+          console.log(link);
+        });
         // Save Links, save links to categories
         Link.create( links, function( error ) {
           if(error) return console.log( error );
