@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('mean.system').controller('HeaderController', ['$scope', 'Global', function ($scope, Global) {
+angular.module('SendMark.system').controller('HeaderController', ['$scope', 'Global', function ($scope, Global) {
     $scope.global = Global;
 
     $scope.menu = [{
-        'title': 'Articles',
-        'link': 'articles'
+        'title': 'Lists',
+        'link': 'lists'
     }, {
-        'title': 'Create New Article',
-        'link': 'articles/create'
+        'title': 'Create New List',
+        'link': 'lists/create'
     }];
-    
+
     $scope.isCollapsed = false;
 }]);

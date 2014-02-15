@@ -1,0 +1,15 @@
+/** Main styles go here **/
+
+// Third-party
+@import "../components/Font-Awesome/scss/font-awesome";
+@import "../components/sass-bootstrap/lib/bootstrap";
+
+// Modules and Variables
+@import "partials/base";
+
+// Partials
+@import "partials/reset";
+@import "partials/typography";
+@import "partials/buttons";
+@import "partials/figures";
+@import "partials/grids";

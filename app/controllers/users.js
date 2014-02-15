@@ -3,8 +3,7 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+var mongoose = require('mongoose');
 
 /**
  * Auth callback
@@ -16,9 +15,10 @@ exports.authCallback = function(req, res) {
 /**
  * Show login form
  */
-exports.signin = function(req, res) {
-    res.render('users/signin', {
-        title: 'Signin',
+exports.renderLogin = function(req, res) {
+    console.log('rendering login');
+    res.render('users/login', {
+        user: req.user,
         message: req.flash('error')
     });
 };
@@ -26,10 +26,10 @@ exports.signin = function(req, res) {
 /**
  * Show sign up form
  */
-exports.signup = function(req, res) {
+exports.renderSignup = function(req, res) {
     res.render('users/signup', {
-        title: 'Sign up',
-        user: new User()
+        user: false,
+        message:req.flash('error')
     });
 };
 
@@ -51,44 +51,39 @@ exports.session = function(req, res) {
 /**
  * Create user
  */
-exports.create = function(req, res, next) {
-    var user = new User(req.body);
-    var message = null;
+ /*
+exports.create = function(req, res, next, UserApp) {
 
-    user.provider = 'local';
-    user.save(function(err) {
-        if (err) {
-            switch (err.code) {
-                case 11000:
-                case 11001:
-                    message = 'Username already exists';
-                    break;
-                default:
-                    message = 'Please fill all the required fields';
-            }
+    // the HTML form names are conveniently named the same as
+    // the UserApp fields...
+    var user = req.body;
 
-            return res.render('users/signup', {
-                message: message,
-                user: user
-            });
-        }
-        req.logIn(user, function(err) {
-            if (err) return next(err);
-            return res.redirect('/');
-        });
+    // Create the user in UserApp
+    UserApp.User.save(user, function(err, user){
+
+      // We can just pass through messages like "Password must be at least 5 characters." etc.
+      if (err) return res.render('signup', {user: false, message: err.message});
+
+      // UserApp passport needs a username parameter
+      req.body.username = req.body.login;
+
+      //on to authentication
+      next();
     });
 };
+*/
 
 /**
  * Send User
  */
-exports.me = function(req, res) {
+exports.account = function(req, res) {
     res.jsonp(req.user || null);
 };
 
 /**
  * Find user by id
  */
+ /*
 exports.user = function(req, res, next, id) {
     User
         .findOne({
@@ -100,4 +95,4 @@ exports.user = function(req, res, next, id) {
             req.profile = user;
             next();
         });
-};
+};*/
