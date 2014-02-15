@@ -1,26 +1,26 @@
 <div class="" data-ng-controller="HeaderController">
     <ul class="navbar-nav nav">
         <li>
-            <a class="navbar-brand" href="/">MEAN - A Modern Stack</a>
+            <a class="navbar-brand" href="/">SendMark</a>
         </li>
-        <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+        <li data-ng-repeat="item in menu" data-ng-show="user.authorized" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
             <a href="#!/{{item.link}}">{{item.title}}</a>
         </li>
     </ul>
-    <ul class="navbar-nav nav pull-right" data-ng-hide="global.authenticated">
-        <li><a href="signup">Signup</a>
+    <ul class="navbar-nav nav pull-right" data-ng-hide="user.authorized">
+        <li><a href="#!/signup">Signup</a>
         </li>
         <li class="divider-vertical"></li>
-        <li><a href="signin">Signin</a>
+        <li><a href="#!/login">Login</a>
         </li>
     </ul>
-    <ul class="navbar-nav nav pull-right" data-ng-show="global.authenticated">
+    <ul class="navbar-nav nav pull-right" data-ng-show="user.authorized">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				{{global.user.name.givenName}} <b class="caret"></b>
+				{{user.login}} <b class="caret"></b>
 			</a>
             <ul class="dropdown-menu">
-                <li><a href="/signout">Signout</a>
+                <li><a href="#!/login" ua-logout>Signout</a>
                 </li>
             </ul>
         </li>

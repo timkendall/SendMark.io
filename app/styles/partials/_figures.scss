@@ -1,0 +1,226 @@
+/** UI Elements **/
+
+#lists-container {
+  //background: lighten($primary-color, 30%);
+  background: lighten($secondary-font-color, 25%);
+  box-shadow: -1px 0px 0px 1px lighten($secondary-font-color, 15%) inset;
+
+  #account {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: darken($primary-color, 0%);
+
+    h3 {
+      display: inline;
+      line-height: 48px;
+      font-weight: $regular;
+
+      color: rgba(255,255,255,0.9);
+    }
+
+    aside.img > img {
+      float: left;
+      display: inline;
+      margin: 0.5em 0.8em;
+      border: 2px solid #fff;
+
+      @include border-top-radius(999px);
+      @include border-bottom-radius(999px);
+      @include border-left-radius(999px);
+      @include border-right-radius(999px);
+    }
+
+    .btn-square {
+      background: darken($primary-color, 30%);
+      line-height: 36px;
+      color: rgba(255,255,255,0.8);
+      @include border-top-radius(0px);
+      @include border-bottom-radius(0px);
+      @include border-left-radius(0px);
+      @include border-right-radius(0px);
+    }
+
+    .btn-square:hover {
+      background: #fff;
+      color: $secondary-font-color;
+      border-right: 1px solid $secondary-font-color;
+    }
+
+     @include clearfix;
+  }
+
+  section.buttons {
+    height: 34px;
+    width: 100%;
+    margin-bottom: 35px;
+
+    .btn {
+      line-height: 2.2em;
+      width: 48%;
+
+      border: none;
+      margin: 0;
+    }
+
+    .btn:first-child {
+      margin-right: 2%;
+    }
+
+    .btn-primary {
+      background: darken($primary-color, 20%);
+    }
+  }
+
+  ul {
+    margin-top: 50px;
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+
+    li:first-child {
+      border-top: 2px solid rgba(255,255,255,0.4);
+    }
+
+    li {
+      margin: 0;
+      padding: 0 15px;
+      line-height: 3.4em;
+      border-bottom: 1px solid lighten($secondary-font-color,15%);
+
+      a {
+        display: block;
+
+        color: lighten(#1a1a1a, 20%);
+        font-weight: $regular;
+
+        i {
+          line-height: 3.4em;
+          @include animation-duration(.3s);
+        }
+
+        .badge {
+          margin-top: 1.25em;
+          background: $red-color;
+        }
+
+
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+
+    li:hover, li.active {
+      color: darken($primary-color, 20%);
+      background: #fff;
+      border-right: 2px solid $primary-color;
+      border-top: none;
+    }
+
+    li.active > a {
+      font-weight: $bold;
+    }
+  }
+
+  .outline {
+    display: block;
+    width: 85px;
+    margin: 25px auto;
+
+    background: none;
+    border: 2px solid darken(#ccc, 15%);
+    color: darken(#ccc, 20%);
+    font-weight: $bold;
+
+    i {
+      padding-right: 4px;
+    }
+  }
+
+  .outline:hover {
+    border: 2px solid darken(#ccc,25%);
+    color: darken(#ccc, 30%)
+  }
+
+  .bottom-sidebar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+
+    background: lighten($primary-color, 30%);
+
+    .btn-group {
+      width: 100%;
+      padding: 0 15px;
+      margin: .5em 0 .5em 0;
+    }
+
+    .btn {
+      width: 40%;
+    }
+  }
+
+}
+
+#links-container {
+
+  ul {
+    padding-left:0;
+
+    list-style: none;
+    list-style-image: none;
+
+    li {
+      padding: 1.2em;
+
+      border-bottom: 1px solid lighten(#000, 75%);
+
+      h1 {
+        margin-top: .6em;
+
+        a {
+          font-weight: $light;
+          color: #4A4A4A;
+        }
+      }
+    }
+  }
+
+}
+
+#finder {
+  background: lighten(#1a1a1a, 15%);
+
+  input[type='text'] {
+    margin: 0 .5em 0 .5em;
+    display: inline-block;
+    width: 75%;
+
+    background: lighten(#1a1a1a, 30%);
+    border: 1px solid #1a1a1a;
+    color: rgba(255,255,255,0.8);
+    @include border-top-radius(999px);
+    @include border-bottom-radius(999px);
+    @include border-left-radius(999px);
+    @include border-right-radius(999px);
+  }
+
+  .btn-group {
+    display: inline-block;
+
+    .btn {
+      background: lighten(#1a1a1a, 30%);
+      border: 1px solid #1a1a1a;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .btn.active {
+      background: lighten(#1a1a1a, 20%);
+    }
+  }
+}

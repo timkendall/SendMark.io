@@ -1,0 +1,15 @@
+// Molten - A fixed-fluid, full-width web application css grid
+@import "../components/molten/molten";
+
+.content-center {
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}

@@ -1,15 +1,20 @@
-extends auth
+extends layouts/centered
 
-block auth
-  form(ua-signup='ua-signup', ua-error='error-msg', action='/signup', method='POST')
-    input.form-control(name='first_name', placeholder='Your name')
-    br
-    input.form-control(name='login', ua-is-email='ua-is-email', placeholder='Email')
-    br
-    input.form-control(name='password', placeholder='Password', type='password')
-    br
+block content
+  p Sign up
+  form(ua-signup='ua-signup', ua-error='error-msg')
+      input(name='first_name', placeholder='Your name')
+      br
+      input(name='login', ua-is-email='ua-is-email', placeholder='Email')
+      br
+      input(name='password', placeholder='Password', type='password')
+      br
+      p
+        button(type='submit') Create account
+        | or
+        a(href='', ua-oauth-link='google') Sign up with Google
+      p#error-msg
     p
-      button.btn.btn-primary(type='submit') Create account
-      | or
-      a(href='', ua-oauth-link='google') Sign up with Google
-    p#error-msg
+      a(href='#!/login') Log in
+  script(type="text/javascript").
+    window.user = !{user};

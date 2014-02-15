@@ -1,0 +1,60 @@
+/** Typography - Import font here **/
+
+// Main font
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+// Alt. headings
+@import url(http://fonts.googleapis.com/css?family=Rokkitt:400,700);
+
+
+h1 {
+    font-family: $fixed-font-family;
+    font-size: 18px;
+    font-weight: $header-font-weight;
+    color: $font-color;
+}
+
+h2 {
+    @extend h1;
+    font-size: 16px;
+}
+
+h3 {
+    @extend h1;
+    font-size: 15px;
+}
+
+h3 > span {
+    font-size: 14px;
+    font-weight: $light;
+    color: $secondary-font-color;
+}
+
+h4 {
+    @extend h1;
+    font-size: 14px;
+    font-weight: $regular;
+}
+
+h5 {
+    @extend h1;
+    font-size: 13px;
+    font-weight: $light;
+    color: $secondary-font-color;
+}
+
+time {
+    @extend h5;
+}
+
+a {
+
+}
+
+p {
+    font-family: $fixed-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: $regular;
+    color: $font-color;
+    text-rendering: optimizeLegibility;
+}
