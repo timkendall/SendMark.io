@@ -4,7 +4,12 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    List;
+
+process.nextTick(function() {
+  List = mongoose.model('List');
+});
 
 /**
  * List Schema
@@ -64,24 +69,32 @@ LinkSchema.pre('save', function(next) {
 
   var self = this;
 
-  if(!this.apartOfNames) next();
+  // Floating link, no categories
+  if(self.apartOfNames.length === 0) next();
+
   // Populate _apartOf (list _id's)
   this.apartOfNames.forEach(function( listName, index, array ) {
     mongoose.model('List').findOne( { name: listName, _creator: self._creator }, function( error, list ) {
       if(error) return console.log( error );
+
       // Create the list if it doesn't exist
       if( !list ) {
-        console.log('here');
-        var list = new mongoose.model('List')({ name: listName, _creator: self._creator });
+        console.log('Creating new list for link.');
+        list = new List({
+          name: listName,
+          _creator: self._creator
+        });
 
+        // Save new list,
         list.save(function( error, list ) {
-          if(error) console.log( '!!!!!!: ' + error );
-          else self._apartOf.push(list._id);
+          if(error) return console.log( '!!!!!!: ' + error );
         });
       }
-      console.log("Still doing foreach");
-      // Push this list's _id to _apartOf
-      self._apartOf.push(list._id);
+
+      // Add link to list
+      self.pushApartOf(list._id);
+
+      console.log('List and link saved and linked.');
     });
   });
 
@@ -92,18 +105,17 @@ LinkSchema.pre('save', function(next) {
  * Post-save hook
  */
 
-LinkSchema.post('save', function (doc) {
+LinkSchema.post('save', function(doc) {
   console.log('%s has been saved', doc._id);
 
   // Find categories to push link to
-  doc._apartOf.forEach(function( list_id, index, array ) {
-    mongoose.model('List').findById( list_id , function( error, list ) {
+  doc._apartOf.forEach(function( listID, index, array ) {
+    mongoose.model('List').findById( listID , function( error, list ) {
       if(error) return  console.log( error );
       if(!list) return;
 
-      console.log("Still doing foreach");
-      // Push this link to list
-      list._items.push(doc_id);
+      // Add list to link
+      list.pushItem(doc._id);
     });
 
   });
@@ -122,8 +134,18 @@ LinkSchema.methods = {
      */
     findSimilar: function(cb) {
         return this.model('Link').find({ url: this.url }, cb);
-    }
-
+    },
+    /**
+     * pushApartOf - using
+     *
+     * @param {Object} cb
+     * @return {Array}
+     * @api public
+     */
+     pushApartOf: function(listID, cb) {
+      this._apartOf.push(listID);
+      this.save(cb);
+     }
 };
 
 /**

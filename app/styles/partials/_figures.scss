@@ -96,6 +96,7 @@
         font-weight: $regular;
 
         i {
+          display: none;
           line-height: 3.4em;
           @include animation-duration(.3s);
         }
@@ -104,13 +105,15 @@
           margin-top: 1.25em;
           background: $red-color;
         }
-
-
       }
 
       a:hover {
         text-decoration: none;
       }
+    }
+
+    li.active > a > i {
+       display: block;
     }
 
     li:hover, li.active {

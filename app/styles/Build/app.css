@@ -6464,6 +6464,7 @@ p {
         color: #4d4d4d;
         font-weight: 400; }
         #lists-container ul li a i {
+          display: none;
           line-height: 3.4em;
           -webkit-animation-duration: 0.3s;
           -moz-animation-duration: 0.3s;
@@ -6473,6 +6474,8 @@ p {
           background: #f35656; }
       #lists-container ul li a:hover {
         text-decoration: none; }
+    #lists-container ul li.active > a > i {
+      display: block; }
     #lists-container ul li:hover, #lists-container ul li.active {
       color: #196d91;
       background: #fff;
