@@ -7,5 +7,5 @@ exports.render = function(req, res) {
         user: req.user ? JSON.stringify(req.user) : 'null'
     });
     */
-    res.render('index');
+    res.render('index'); // Need to send  user?
 };

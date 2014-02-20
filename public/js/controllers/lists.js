@@ -61,7 +61,7 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 				$scope.lists = data;
 			}).
 			error(function(data, status, headers, config) {
-				alert("The API call to the back-end was NOT successful (i.e. an invalid session).");
+				//alert("The API call to the back-end was NOT successful (i.e. an invalid session).");
 			});
 	};
 
