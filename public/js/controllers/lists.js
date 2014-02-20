@@ -70,7 +70,6 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 			listId: $routeParams.listId
 		}, function(list) {
 			$scope.list = list;
-			console.log("Current list items: " + $scope.list._items);
 		});
 	};
 }]);

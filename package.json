@@ -44,7 +44,8 @@
     "supertest": "0.8.2",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-coverage": "~0.1.4",
-    "karma": "~0.10.9"
+    "karma": "~0.10.9",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {
     "supertest": "0.8.2",
