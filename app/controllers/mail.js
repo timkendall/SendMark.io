@@ -18,7 +18,7 @@ if (!String.prototype.trim) {
    };
 }
 
-exports.configListener = function(){
+exports.configListener = function() {
   mailListener = new MailListener({
     username: "sendmarkadd@gmail.com",
     password: "thisisatest!",
@@ -39,21 +39,25 @@ exports.configListener = function(){
   mailListener.on("server:disconnected", function(){
     console.log("imapDisconnected");
     // Reconnect
-    mailListener.start();
+    process.nextTick(function() {
+      mailListener.start();
+    });
   });
 
   mailListener.on("error", function(err){
     console.log(err);
+    // Reconnect
+    process.nextTick(function() {
+      mailListener.start();
+    });
   });
 
   mailListener.on("mail", function(mail) {
     var links,
-      from,
-      subject,
-      body;
+      senderAddress;
 
     /**
-      * Parse Message
+      * Parse/Validate Message
       *
       * 1) Split valid urls in subject into arrays
       * 2) Extract categories and tags for each url
@@ -63,15 +67,10 @@ exports.configListener = function(){
     console.log("From:", mail.from);
     console.log("Subject:", mail.subject);
 
-    from = mail.from[0].address;
+    senderAddress = mail.from[0].address;
 
-    if( typeof mail.subject === 'undefined' ) {
-      subject = "";
-    } else {
-      subject = mail.subject.split(',');
-    }
-
-    body = mail.text;
+    /*if( typeof mail.subject === 'undefined' )
+      return console.log('Email contained no links.')*/
 
     /**
       * Generate List and Link Objects
@@ -85,29 +84,31 @@ exports.configListener = function(){
       *
       */
 
-    User.findOne( { email: from } ).exec(function( err, user ) {
+    User.findOne( { email: senderAddress } ).exec(function( err, user ) {
       if (err) console.log(err);
-      if ( !user ) {
+      if (!user) {
         // Todo: Send invite to unregistered user
 
-        console.log('Not user' + from);
+        console.log(senderAddress + ' is not a registered user.');
       } else {
         // Extract links
-        links = Mailman.extractLinks( user, subject, body);
-        console.log('Extracted links');
-        if(!links) return console.log( 'No links found');
+        links = Mailman.extractLinks( user, mail );
 
-        // Print links to console
+        if(!links) return;
+
+        // Print links to console (should also save to console so we can see how we're doing on parsing (i.e Winston). )
         links.forEach(function( link, index, array ) {
           console.log(link);
         });
+
         // Save Links, save links to categories
         Link.create( links, function( error ) {
           if(error) return console.log( error );
-          console.log('Saved link');
+          console.log('Saved link for ' + user.email);
         });
       }
     });
+
   });
 };
 

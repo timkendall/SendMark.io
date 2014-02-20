@@ -11,7 +11,6 @@ var mongoose = require('mongoose'),
  */
 var ListSchema = new Schema({
     name: String,
-    creatorUsername: String,
     _creator: {
         type: String, // UserApp user_id
         required: true,
@@ -55,8 +54,8 @@ ListSchema.pre('save', function(next) {
 
     if (!validatePresenceOf(this.name))
         next(new Error('Missing list name'));
-    else
-        next();
+
+    next();
 });
 /**
  * Post-save hook
@@ -82,7 +81,18 @@ ListSchema.methods = {
      */
     findSimilarTypes: function(cb) {
         return this.model('List').find({ name: this.name }, cb);
-    }
+    },
+    /**
+     * pushItem - add a link to _items
+     *
+     * @param {Object} cb
+     * @return {Array}
+     * @api public
+     */
+     pushItem: function(linkID, cb) {
+      this._items.push(linkID);
+      this.save(cb);
+     }
 };
 
 /**
@@ -93,7 +103,7 @@ ListSchema.statics.loadAllOfUsers = function(user, cb) {
     console.log(user.username);
 
     this.find({
-        creatorUsername: user.username
+        _creator: user._id
     }).populate('_creator _items').exec(cb);
 };
 

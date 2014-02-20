@@ -6464,6 +6464,7 @@ p {
         color: #4d4d4d;
         font-weight: 400; }
         #lists-container ul li a i {
+          display: none;
           line-height: 3.4em;
           -webkit-animation-duration: 0.3s;
           -moz-animation-duration: 0.3s;
@@ -6473,6 +6474,8 @@ p {
           background: #f35656; }
       #lists-container ul li a:hover {
         text-decoration: none; }
+    #lists-container ul li.active > a > i {
+      display: block; }
     #lists-container ul li:hover, #lists-container ul li.active {
       color: #196d91;
       background: #fff;
@@ -6545,6 +6548,104 @@ p {
       color: rgba(255, 255, 255, 0.8); }
     #finder .btn-group .btn.active {
       background: #4d4d4d; }
+
+.centered {
+  height: 100%; }
+
+.centered > section {
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  /* works with row or column */
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center; }
+
+#login {
+  background: #34aadc; }
+  #login h1, #login h2, #login h3, #login h4, #login h5, #login time {
+    margin-bottom: 40px;
+    font-size: 46px;
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    -o-transform: rotate(-30deg);
+    transform: rotate(-30deg); }
+    #login h1 span > .fa-circle, #login h2 span > .fa-circle, #login h3 span > .fa-circle, #login h4 span > .fa-circle, #login h5 span > .fa-circle, #login time span > .fa-circle {
+      color: #fff; }
+    #login h1 span > .fa-user, #login h2 span > .fa-user, #login h3 span > .fa-user, #login h4 span > .fa-user, #login h5 span > .fa-user, #login time span > .fa-user {
+      color: #34aadc; }
+  #login input {
+    width: 300px;
+    height: 44px;
+    padding: 12px 10px;
+    vertical-align: middle;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px; }
+    #login input::-webkit-input-placeholder {
+      color: #b5b5b5; }
+    #login input:-moz-placeholder {
+      color: #b5b5b5; }
+    #login input::-moz-placeholder {
+      color: #b5b5b5; }
+    #login input:-ms-input-placeholder {
+      color: #b5b5b5; }
+  #login input[type='text']:focus, #login input[type='password']:focus {
+    border: 2px solid #155d7b;
+    border-left: none; }
+  #login input[type='text']:focus + .addon, #login input[type='password']:focus + .addon {
+    background: #155d7b;
+    border: 2px solid #155d7b;
+    border-right: none;
+    color: #fff; }
+  #login .input-group:first-child {
+    margin-bottom: 12px; }
+  #login input[type='text'] {
+    border: 1px solid #249ed2;
+    border-left: none;
+    box-shadow: none; }
+  #login input[type='password'] {
+    border: 1px solid #249ed2;
+    border-left: none;
+    box-shadow: none; }
+  #login .input-group .addon {
+    display: inline-block;
+    float: left;
+    height: 44px;
+    padding: .5em;
+    padding: 12px 14px;
+    vertical-align: middle;
+    background: #e8e8e8;
+    color: #5f6571;
+    border: 1px solid #249ed2;
+    border-right: 1px solid #cfcfcf;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+  #login h4 {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 35px;
+    color: rgba(255, 255, 255, 0.6); }
+  #login .btn, #login .btn:hover#signup {
+    width: 100%;
+    background: #fff;
+    color: #196d91;
+    border: none;
+    line-height: 36px;
+    font-weight: 700; }
+  #login .btn:hover, #login .btn#signup {
+    background: #114c66;
+    color: white; }
+  #login a {
+    color: #114c66;
+    text-decoration: underline;
+    text-align: center; }
 
 body,
 html {

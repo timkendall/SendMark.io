@@ -1,14 +1,22 @@
 
   <section id="account">
-    <aside class="img"><img src="http://d13yacurqjgara.cloudfront.net/users/9597/avatars/normal/ID_photo_small.jpg?1351213131" width="36px" height="36px"/></aside>
+    <aside class="img"><img src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}" width="36px" height="36px"/></aside>
 
     <h3>{{user.login}}</h3>
 
     <a href="#!/login" ua-logout class="btn btn-square pull-right"> <i class="fa fa-sign-out"></i></a>
   </section>
 
-  <ul>
-    <!-- Lists go here! -->
+  <ul ng-controller="ListsCtrl" data-ng-init="find()">
+    <li ng-repeat="list in lists" ng-class='{ active: isActive(list._id)}' ng-click="setList(list._id)">
+      <a ng-href="#!/lists/{{list._id}}">
+        {{list.name}}
+        <i class="fa fa-chevron-right pull-right animated fadeInLeft"></i>
+        <span class="badge pull-right">{{list.count}}</span>
+      </a>
+    </li>
+
+    <h2 ng-hide="!lists || lists.length">No lists yet.</h1>
   </ul>
 
   <button type="button" class="btn btn-default outline"><i class="fa fa-plus"></i> New</button>

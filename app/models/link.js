@@ -4,7 +4,12 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    List;
+
+process.nextTick(function() {
+  List = mongoose.model('List');
+});
 
 /**
  * List Schema
@@ -20,10 +25,6 @@ var LinkSchema = new Schema({
     },
     apartOfNames: [{
       type: String
-    }],
-    _apartOf: [{
-      type: Schema.ObjectId,
-      ref: 'List'
     }],
     tags: [ String ],
     popularity: {
@@ -62,26 +63,32 @@ LinkSchema.pre('save', function(next) {
   if (!validatePresenceOf(this.url))
     next(new Error('Missing link URL'));
 
+  // Save reference to 'this'
   var self = this;
 
-  if(!this.apartOfNames) next();
-  // Populate _apartOf (list _id's)
+  // Upsert (create if non-existent) Link to Lists
   this.apartOfNames.forEach(function( listName, index, array ) {
     mongoose.model('List').findOne( { name: listName, _creator: self._creator }, function( error, list ) {
       if(error) return console.log( error );
+
       // Create the list if it doesn't exist
       if( !list ) {
-        console.log('here');
-        var list = new mongoose.model('List')({ name: listName, _creator: self._creator });
+        console.log('Creating new list for link.');
+        list = new List({
+          name: listName,
+          _creator: self._creator
+        });
 
+        // Save new list,
         list.save(function( error, list ) {
-          if(error) console.log( '!!!!!!: ' + error );
-          else self._apartOf.push(list._id);
+          if(error) return console.log( '!!!!!!: ' + error );
         });
       }
-      console.log("Still doing foreach");
-      // Push this list's _id to _apartOf
-      self._apartOf.push(list._id);
+
+      // Push link to list
+      list.pushItem(self._id);
+
+      console.log('List and link saved and linked.');
     });
   });
 
@@ -92,21 +99,7 @@ LinkSchema.pre('save', function(next) {
  * Post-save hook
  */
 
-LinkSchema.post('save', function (doc) {
-  console.log('%s has been saved', doc._id);
-
-  // Find categories to push link to
-  doc._apartOf.forEach(function( list_id, index, array ) {
-    mongoose.model('List').findById( list_id , function( error, list ) {
-      if(error) return  console.log( error );
-      if(!list) return;
-
-      console.log("Still doing foreach");
-      // Push this link to list
-      list._items.push(doc_id);
-    });
-
-  });
+LinkSchema.post('save', function(doc) {
 })
 
 /**
@@ -123,7 +116,6 @@ LinkSchema.methods = {
     findSimilar: function(cb) {
         return this.model('Link').find({ url: this.url }, cb);
     }
-
 };
 
 /**

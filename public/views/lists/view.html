@@ -1,15 +1,15 @@
-<section data-ng-controller="ListsController" data-ng-init="findOne()">
-    <span>{{list.created | date:'medium'}}</span>/
-    <span>{{list.user.name}}</span>
-    <h2>{{list.name}}</h2>
+<section data-ng-controller="ListsCtrl" data-ng-init="findOne()">
+    <!-- List info -->
+
     <!-- Show edit/delet buttons if user is list creator -->
-    <div data-ng-show="global.user._id == list.user._id">
-        <a class="btn" href="/#!/articles/{{article._id}}/edit">
-        	<i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
-        </a>
-    </div>
-    <div>{{article.content}}</div>
+
+    <!-- List links in list -->
+    <ul>
+        <li ng-repeat="link in list._items">
+            <h2><a ng-href="{{link.url}}" target="_blank">{{link.url}}</a></h2>
+            <time>{{link.created}}</time>
+        </li>
+    </ul>
+
+    <h2 ng-hide="!list._items || list._items.length">No links yet.</h1>
 </section>
