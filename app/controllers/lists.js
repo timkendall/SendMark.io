@@ -96,6 +96,8 @@ exports.update = function(req, res) {
 exports.destroy = function(req, res) {
     var list = req.list;
 
+    console.log('List Controller - attempting to destroy list: ' + list);
+
     list.remove(function(err) {
         if (err) {
             return res.send('users/signup', {

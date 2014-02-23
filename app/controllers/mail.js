@@ -91,7 +91,7 @@ exports.configListener = function() {
 
         console.log(senderAddress + ' is not a registered user.');
       } else {
-        // Extract links
+        // Extract Links and Generate Link Objects
         links = Mailman.extractLinks( user, mail );
 
         if(!links) return;
