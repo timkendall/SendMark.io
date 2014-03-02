@@ -45,7 +45,9 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-coverage": "~0.1.4",
     "karma": "~0.10.9",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "sendmark-mailman": "latest",
+    "async": "~0.2.10"
   },
   "devDependencies": {
     "supertest": "0.8.2",

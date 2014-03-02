@@ -58,14 +58,22 @@ ListSchema.pre('save', function(next) {
 
 	next();
 });
+
 /**
- * Post-save hook
+ * Middleware
  */
 
 ListSchema.post('save', function (doc) {
   // Populate creatorUsername if empty
 
   // Increment list count
+});
+
+ListSchema.post('remove', function (doc) {
+	// Remove self from items _lists
+	doc._items.forEach(function (_item) {
+		_item.removeList(doc._id);
+	})
 });
 
 

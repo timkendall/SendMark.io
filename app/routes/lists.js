@@ -6,7 +6,7 @@ var authorization = require('./middlewares/authorization');
 
 // List authorization helper (i.e decide if creator of list is accessor)
 var hasAuthorization = function(req, res, next) {
-	if (req.list.user._id !== req.user.id) {
+	if (req.list._creator._id !== req.user._id) {
 		return res.send(401, 'User is not authorized');
 	}
 	next();

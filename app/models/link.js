@@ -5,7 +5,8 @@
  */
 var mongoose = require('mongoose'),
 		Schema = mongoose.Schema,
-		List;
+		List,
+		_ = require('lodash');
 
 process.nextTick(function() {
 	List = mongoose.model('List');
@@ -47,14 +48,15 @@ var LinkSchema = new Schema({
 /**
  * Validations
  */
-var validatePresenceOf = function(value) {
+var validatePresenceOf = function (value) {
 		return value && value.length;
 };
 
 /**
- * Pre-save hook
+ * Middleware
  */
-LinkSchema.pre('save', function(next) {
+
+LinkSchema.pre('save', function (next) {
 	var self = this;
 
 	if (!this.isNew) return next();
@@ -65,12 +67,24 @@ LinkSchema.pre('save', function(next) {
 	next();
 });
 
-/**
- * Post-save hook
- */
+LinkSchema.post('save', function (doc) {
+	// Add link to its _lists
+	doc._lists.forEach(function (_list) {
+		List.findOne({ _id: _list }, function (err, list) {
+			if (err) return console.log(err);
+			if (!list) return;
 
-LinkSchema.post('save', function(doc) {
-})
+			list.addItem(doc._id);
+		});
+	});
+});
+
+LinkSchema.post('remove', function (doc) {
+	// Remove self from _lists
+	doc._lists.forEach(function (_list) {
+		_list.removeItem(doc._id);
+	})
+});
 
 /**
  * Methods
@@ -83,8 +97,16 @@ LinkSchema.methods = {
 		 * @return {Array}
 		 * @api public
 		 */
-		findSimilar: function(cb) {
+		findSimilar: function (cb) {
 				return this.model('Link').find({ url: this.url }, cb);
+		},
+		addList: function (list)  {
+			this._lists.push(list);
+			this.save();
+		},
+		removeList: function (list) {
+			_.pull(this._lists, list);
+			this.save();
 		}
 };
 
@@ -92,7 +114,7 @@ LinkSchema.methods = {
  * Statics
  */
 
-LinkSchema.statics.load = function(id, cb) {
+LinkSchema.statics.load = function (id, cb) {
 		this.findOne({
 				_id: id
 		}).populate('_creator').exec(cb);
