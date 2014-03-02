@@ -4,42 +4,40 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    List;
+		Schema = mongoose.Schema,
+		List,
+		_ = require('lodash');
 
 process.nextTick(function() {
-  List = mongoose.model('List');
+	List = mongoose.model('List');
 });
 
 /**
  * List Schema
  */
 var LinkSchema = new Schema({
-    url: {
-        type: String,
-        required: true
-    },
-    created: {
-        type: Date,
-        default: Date.now
-    },
-    apartOfNames: [{
-      type: String
-    }],
-    tags: [ String ],
-    popularity: {
-        type: Number,
-        default: 0
-    },
-    creatorEmail: {
-        type: String,
-        required: true,
-    },
-    _creator: {
-        type: String, // UserApp user_id
-        required: false,
-        ref: 'User'
-    }
+		url: {
+				type: String,
+				required: true
+		},
+		created: {
+				type: Date,
+				default: Date.now
+		},
+		tags: [ String ],
+		popularity: {
+				type: Number,
+				default: 0
+		},
+		_lists: [{
+			type: Schema.ObjectId,
+			ref: 'List'
+		}],
+		_creator: {
+				type: String, // UserApp user_id
+				required: false,
+				ref: 'User'
+		}
 });
 
 /**
@@ -50,82 +48,76 @@ var LinkSchema = new Schema({
 /**
  * Validations
  */
-var validatePresenceOf = function(value) {
-    return value && value.length;
+var validatePresenceOf = function (value) {
+		return value && value.length;
 };
 
 /**
- * Pre-save hook
+ * Middleware
  */
-LinkSchema.pre('save', function(next) {
-  if (!this.isNew) return next();
 
-  if (!validatePresenceOf(this.url))
-    next(new Error('Missing link URL'));
+LinkSchema.pre('save', function (next) {
+	var self = this;
 
-  // Save reference to 'this'
-  var self = this;
+	if (!this.isNew) return next();
 
-  // Upsert (create if non-existent) Link to Lists
-  this.apartOfNames.forEach(function( listName, index, array ) {
-    mongoose.model('List').findOne( { name: listName, _creator: self._creator }, function( error, list ) {
-      if(error) return console.log( error );
+	if (!validatePresenceOf(this.url))
+		next(new Error('Missing link URL'));
 
-      // Create the list if it doesn't exist
-      if( !list ) {
-        console.log('Creating new list for link.');
-        list = new List({
-          name: listName,
-          _creator: self._creator
-        });
-
-        // Save new list,
-        list.save(function( error, list ) {
-          if(error) return console.log( '!!!!!!: ' + error );
-        });
-      }
-
-      // Push link to list
-      list.pushItem(self._id);
-
-      console.log('List and link saved and linked.');
-    });
-  });
-
-  next();
+	next();
 });
 
-/**
- * Post-save hook
- */
+LinkSchema.post('save', function (doc) {
+	// Add link to its _lists
+	doc._lists.forEach(function (_list) {
+		List.findOne({ _id: _list }, function (err, list) {
+			if (err) return console.log(err);
+			if (!list) return;
 
-LinkSchema.post('save', function(doc) {
-})
+			list.addItem(doc._id);
+		});
+	});
+});
+
+LinkSchema.post('remove', function (doc) {
+	// Remove self from _lists
+	doc._lists.forEach(function (_list) {
+		_list.removeItem(doc._id);
+	})
+});
 
 /**
  * Methods
  */
 LinkSchema.methods = {
-    /**
-     * findSimilarTypes - return lists with similar names; for fun
-     *
-     * @param {Object} cb
-     * @return {Array}
-     * @api public
-     */
-    findSimilar: function(cb) {
-        return this.model('Link').find({ url: this.url }, cb);
-    }
+		/**
+		 * findSimilarTypes - return lists with similar names; for fun
+		 *
+		 * @param {Object} cb
+		 * @return {Array}
+		 * @api public
+		 */
+		findSimilar: function (cb) {
+				return this.model('Link').find({ url: this.url }, cb);
+		},
+		addList: function (list)  {
+			this._lists.push(list);
+			this.save();
+		},
+		removeList: function (list) {
+			_.pull(this._lists, list);
+			this.save();
+		}
 };
 
 /**
  * Statics
  */
 
-LinkSchema.statics.load = function(id, cb) {
-    this.findOne({
-        _id: id
-    }).populate('_creator').exec(cb);
+LinkSchema.statics.load = function (id, cb) {
+		this.findOne({
+				_id: id
+		}).populate('_creator').exec(cb);
 };
 
 mongoose.model('Link', LinkSchema);

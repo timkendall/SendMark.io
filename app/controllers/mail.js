@@ -53,8 +53,8 @@ exports.configListener = function() {
   });
 
   mailListener.on("mail", function(mail) {
-    var links,
-      senderAddress;
+    var senderAddress;
+
 
     /**
       * Parse/Validate Message
@@ -84,27 +84,27 @@ exports.configListener = function() {
       *
       */
 
-    User.findOne( { email: senderAddress } ).exec(function( err, user ) {
+    User.findOne( { email: senderAddress } ).exec(function (err, user) {
       if (err) console.log(err);
       if (!user) {
         // Todo: Send invite to unregistered user
 
         console.log(senderAddress + ' is not a registered user.');
       } else {
-        // Extract links
-        links = Mailman.extractLinks( user, mail );
+        // Extract Links and Generate Link Objects
+        Mailman.extractLinks(user, mail, function (links) {
+          if (!links) return;
 
-        if(!links) return;
+          // Print links to console (should also save to console so we can see how we're doing on parsing (i.e Winston). )
+          links.forEach(function (link, index, array) {
+            console.log(link);
+          });
 
-        // Print links to console (should also save to console so we can see how we're doing on parsing (i.e Winston). )
-        links.forEach(function( link, index, array ) {
-          console.log(link);
-        });
-
-        // Save Links, save links to categories
-        Link.create( links, function( error ) {
-          if(error) return console.log( error );
-          console.log('Saved link for ' + user.email);
+          // Save Links, save links to categories
+          Link.create( links, function (error) {
+            if (error) return console.log(error);
+            console.log('Saved link for ' + user.email);
+          });
         });
       }
     });
