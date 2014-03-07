@@ -7,11 +7,14 @@
     </a>
     <!-- List links in list -->
     <ul>
-        <li ng-repeat="link in list._items">
+        <li ng-repeat="link in list._items | filter:search | orderBy:'url'">
             <h2><a ng-href="{{link.url}}" target="_blank">{{link.url}}</a></h2>
             <time>{{link.created}}</time>
         </li>
     </ul>
 
+    <input type="text" class="form-control" id="inputKeys" ng-model="search" placeholder="Keywords">
+
     <h2 ng-hide="!list._items || list._items.length">No links yet.</h1>
+
 </section>

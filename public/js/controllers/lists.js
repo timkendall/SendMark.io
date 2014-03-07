@@ -14,6 +14,8 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
     alert(data.link);
   });
 
+  $scope.search = 'a';
+
 	$scope.create = function() {
 		var list = new Lists({
 			name: this.name
