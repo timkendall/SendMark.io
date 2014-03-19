@@ -17,7 +17,7 @@ var express = require('express'),
 
 // Load configurations
 // Set the node enviornment variable if not set before
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 3000;
 
 // Initializing system variables
 var config = require('./config/config'),
