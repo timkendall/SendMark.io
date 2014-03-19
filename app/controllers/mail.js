@@ -39,17 +39,26 @@ exports.configListener = function() {
   mailListener.on("server:disconnected", function(){
     console.log("imapDisconnected");
     // Reconnect
-    process.nextTick(function() {
-      mailListener.start();
-    });
+    try {
+      process.nextTick(function() {
+        mailListener.start();
+      });
+    } catch (error) {
+      console.log('Error connecting to mail server: ' + error);
+    }
   });
 
   mailListener.on("error", function(err){
     console.log(err);
     // Reconnect
-    process.nextTick(function() {
-      mailListener.start();
-    });
+    try {
+      process.nextTick(function() {
+        mailListener.start();
+      });
+    } catch (error) {
+      console.log('Error connecting to mail server: ' + error);
+    }
+
   });
 
   mailListener.on("mail", function(mail) {
