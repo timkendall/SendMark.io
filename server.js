@@ -26,7 +26,9 @@ var config = require('./config/config'),
 	mongoose = require('mongoose');
 
 // Bootstrap db connection
+console.log('Trying to connect!');
 var db = mongoose.connect(config.db);
+console.log('Connected');
 
 // Bootstrap models
 var models_path = __dirname + '/app/models';
