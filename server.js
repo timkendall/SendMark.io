@@ -17,7 +17,9 @@ var express = require('express'),
 
 // Load configurations
 // Set the node enviornment variable if not set before
-process.env.NODE_ENV = process.env.NODE_ENV || 3000;
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+console.log('NODE_ENV:' + process.env.NODE_ENV);
+console.log('MongoHQ URI:' + process.env.MONGOHQ_URL);
 
 // Initializing system variables
 var config = require('./config/config'),
