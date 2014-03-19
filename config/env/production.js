@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    db: "mongodb://localhost/sendmark",
+    db: process.env.MONGOHQ_URL,
     app: {
         name: "SendMark - Production"
     },
