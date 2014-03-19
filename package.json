@@ -46,7 +46,7 @@
     "karma-coverage": "~0.1.4",
     "karma": "~0.10.9",
     "socket.io": "~0.9.16",
-    "sendmark-mailman": "latest",
+    "sendmark-mailman": "git://github.com/timkendall/sendmark-mailman.git",
     "async": "~0.2.10"
   },
   "devDependencies": {

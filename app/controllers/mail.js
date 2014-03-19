@@ -101,6 +101,7 @@ exports.configListener = function() {
           });
 
           // Save Links, save links to categories
+          // [OPTIMIZATION] Alredy have Link objects, just 'save' instead of create?
           Link.create( links, function (error) {
             if (error) return console.log(error);
             console.log('Saved link for ' + user.email);
