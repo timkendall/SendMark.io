@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', 'Socket', function ($scope, $routeParams, $location, $http, Global, Lists, Socket) {
+angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', function ($scope, $routeParams, $location, $http, Global, Lists) {
 	$scope.global = Global;
 	$scope.lists = [];
 
@@ -10,9 +10,10 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 	};
 
 	// Socket.io Tests
+	/*
 	Socket.on('created-remote-test', function (data) {
     alert(data.link);
-  });
+  });*/
 
   $scope.search = 'a';
 
