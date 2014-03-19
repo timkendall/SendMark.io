@@ -26,15 +26,9 @@ var config = require('./config/config'),
 	mongoose = require('mongoose');
 
 // Bootstrap db connection
-<<<<<<< HEAD
 console.log('Trying to connect!');
 var db = mongoose.connect(config.db);
 console.log('Connected');
-=======
-console.log('Abou to connect!!');
-var db = mongoose.connect(config.db + '/sendmark');
-console.log('Connected!');
->>>>>>> 67c13ba6db518a954f266f0a23c1709e6e6cd5dc
 
 // Bootstrap models
 var models_path = __dirname + '/app/models';
