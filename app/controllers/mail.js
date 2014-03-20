@@ -137,18 +137,22 @@ exports.parse = function (req, res) {
   console.log('Mailgun SUBJECT: ' + req.body.subject);
   console.log('Mailgun body-plain: ' + req.body['body-plain']);
 
+  if (!req.body.sender) return;
+  if (!req.body.subject) return;
+  if (!req.body['body-plain']) return;
+
   var mail = {
     sender: req.body.sender,
     subject: req.body.subject,
     text: req.body['body-plain']
   }
 
-  User.findOne( { email: sender } ).exec(function (err, user) {
+  User.findOne( { email: mail.sender } ).exec(function (err, user) {
       if (err) console.log(err);
       if (!user) {
         // Todo: Send invite to unregistered user
 
-        console.log(sender + ' is not a registered user.');
+        console.log(mail.sender + ' is not a registered user.');
       } else {
         // Extract Links and Generate Link Objects
         Mailman.extractLinks(user, mail, function (links) {
