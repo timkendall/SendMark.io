@@ -10,6 +10,6 @@ var authorization = require('./middlewares/authorization');
 module.exports = function(app, passport) {
 
   // Blindly accept POST data from Mailgun [TODO: Authenticate]
-  app.post('/api/4Drf22/mail', mail.log);
+  app.post('/api/4Drf22/mail', mail.parse);
 
 };
