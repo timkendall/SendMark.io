@@ -129,3 +129,41 @@ exports.start = function (){
 exports.log = function (req, res) {
   console.log('Mailgun POST: ' + req.body.subject);
 };
+
+exports.parse = function (req, res) {
+  console.log('Mailgun FROM: ' + req.body.from);
+  console.log('Mailgun SUBJECT: ' + req.body.subject);
+  console.log('Mailgun body-plain: ' + req.body.body-plain);
+
+  var mail = {
+    subject: req.body.subject,
+    text: req.body.body-plain
+  }
+
+  User.findOne( { email: from } ).exec(function (err, user) {
+      if (err) console.log(err);
+      if (!user) {
+        // Todo: Send invite to unregistered user
+
+        console.log(from + ' is not a registered user.');
+      } else {
+        // Extract Links and Generate Link Objects
+        Mailman.extractLinks(user, mail, function (links) {
+          if (!links) return;
+
+          // Print links to console (should also save to console so we can see how we're doing on parsing (i.e Winston). )
+          links.forEach(function (link, index, array) {
+            console.log(link);
+          });
+
+          // Save Links, save links to categories
+          // [OPTIMIZATION] Alredy have Link objects, just 'save' instead of create?
+          Link.create( links, function (error) {
+            if (error) return console.log(error);
+            console.log('Saved link for ' + user.email);
+          });
+        });
+      }
+    });
+
+}
