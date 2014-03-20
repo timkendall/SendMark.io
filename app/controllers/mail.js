@@ -131,13 +131,15 @@ exports.log = function (req, res) {
 };
 
 exports.parse = function (req, res) {
+
+  console.log(JSON.stringify(req.body));
   console.log('Mailgun FROM: ' + req.body.from);
   console.log('Mailgun SUBJECT: ' + req.body.subject);
-  console.log('Mailgun body-plain: ' + req.body.body-plain);
+  console.log('Mailgun body-plain: ' + req.body.bodyPlain);
 
   var mail = {
     subject: req.body.subject,
-    text: req.body.body-plain
+    text: req.body.bodyPlain
   }
 
   User.findOne( { email: from } ).exec(function (err, user) {
