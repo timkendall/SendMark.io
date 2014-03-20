@@ -132,7 +132,7 @@ exports.log = function (req, res) {
 
 exports.parse = function (req, res) {
 
-  console.log(JSON.stringify(req.body));
+  //console.log(JSON.stringify(req.body));
   console.log('Mailgun SENDER: ' + req.body.sender);
   console.log('Mailgun SUBJECT: ' + req.body.subject);
   console.log('Mailgun body-plain: ' + req.body['body-plain']);
