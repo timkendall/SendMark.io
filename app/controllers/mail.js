@@ -127,5 +127,5 @@ exports.start = function (){
 };
 
 exports.log = function (req, res) {
-  console.log('Mailgun POST: ' + req.body);
+  console.log('Mailgun POST: ' + req.body.subject);
 };
