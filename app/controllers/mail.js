@@ -122,6 +122,10 @@ exports.configListener = function() {
   });
 };
 
-exports.start = function(){
+exports.start = function (){
     mailListener.start();
+};
+
+exports.log = function (req, res) {
+  console.log('Mailgun POST: ' + req.body);
 };

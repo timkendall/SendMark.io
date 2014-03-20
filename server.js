@@ -103,9 +103,10 @@ logger.init(app, passport, mongoose);
 // Start Mail Listener (must do this AFTER models are initalized)
 var emailController = require('./app/controllers/mail');
 
-emailController.configListener();
-emailController.start();
-
+if (process.env.NODE_ENV === 'development') {
+	emailController.configListener();
+	emailController.start();
+}
 
 // Expose app
 exports = module.exports = app;
