@@ -137,14 +137,13 @@ exports.parse = function (req, res) {
   console.log('Mailgun SUBJECT: ' + req.body.subject);
   console.log('Mailgun body-plain: ' + req.body['body-plain']);
 
-  if (!req.body.sender) return;
-  if (!req.body.subject) return;
-  if (!req.body['body-plain']) return;
+  if (!req.body.sender) res.send(200);
+  if (!req.body.subject) res.send(200);
 
   var mail = {
     sender: req.body.sender,
     subject: req.body.subject,
-    text: req.body['body-plain']
+    text: req.body['body-plain'] || ''
   }
 
   User.findOne( { email: mail.sender } ).exec(function (err, user) {
