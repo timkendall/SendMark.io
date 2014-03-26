@@ -1,0 +1,85 @@
+#header {
+  background: #34AADC;
+
+  .account {
+    display: inline-block;
+    padding: 0px 10px;
+    background: #20769B;
+
+    img#avatar {
+      display: inline-block;
+      margin: 0 8px 0 0;
+      @include border-top-radius(999px);
+      @include border-bottom-radius(999px);
+      @include border-left-radius(999px);
+      @include border-right-radius(999px);
+      border: 1px solid #fff;
+    }
+
+    h4 {
+      display: inline-block;
+      color: #fff;
+      margin: 0px;
+      line-height: 40px;
+
+      .caret {
+        margin: 0 0 0 8px;
+        border-top-color: rgba(255,255,255,0.5);
+      }
+    }
+  }
+
+  .account:hover {
+    cursor: pointer;
+    background: darken(#20769B, 5%);
+  }
+
+  .alerts {
+    display: inline-block;
+    padding: 0 10px;
+    color: #20769B;
+  }
+
+  .adder {
+   display: inline-block;
+  }
+
+  .adder > .form-inline {
+    display: inline-block;
+
+    .form-group > input[type='text'].form-control {
+      display: inline-block;
+      height: 40px;
+      margin: 0;
+      padding: 0 20px;
+      border: none;
+      background: #8ADCFF;
+      box-shadow: none;
+      @include border-top-radius(0px);
+      @include border-bottom-radius(0px);
+      @include border-left-radius(0px);
+      @include border-right-radius(0px);
+      color: #20769B;
+
+      @include placeholder {
+        color: lighten(#34AADC,5%);
+        font-weight: $light;
+      }
+    }
+
+    .btn {
+      display: inline-block;
+      height: 40px;
+      background: $secondary-color;
+      color: #fff;
+      font-size: 13px;
+      font-weight: $bold;
+      border: none;
+      box-shadow: none;
+      @include border-top-radius(0px);
+      @include border-bottom-radius(0px);
+      @include border-left-radius(0px);
+      @include border-right-radius(0px);
+    }
+  }
+}

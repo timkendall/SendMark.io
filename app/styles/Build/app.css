@@ -6370,7 +6370,7 @@ h3 > span {
 
 h4 {
   font-size: 14px;
-  font-weight: 400; }
+  font-weight: 700; }
 
 h5, time {
   font-size: 13px;
@@ -7229,3 +7229,87 @@ html {
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center; }
+
+#header {
+  background: #34AADC; }
+  #header .account {
+    display: inline-block;
+    padding: 0px 10px;
+    background: #20769B; }
+    #header .account img#avatar {
+      display: inline-block;
+      margin: 0 8px 0 0;
+      border-top-left-radius: 999px;
+      border-top-right-radius: 999px;
+      border-bottom-left-radius: 999px;
+      border-bottom-right-radius: 999px;
+      border-top-left-radius: 999px;
+      border-bottom-left-radius: 999px;
+      border-top-right-radius: 999px;
+      border-bottom-right-radius: 999px;
+      border: 1px solid #fff; }
+    #header .account h4 {
+      display: inline-block;
+      color: #fff;
+      margin: 0px;
+      line-height: 40px; }
+      #header .account h4 .caret {
+        margin: 0 0 0 8px;
+        border-top-color: rgba(255, 255, 255, 0.5); }
+  #header .account:hover {
+    cursor: pointer;
+    background: #1c6686; }
+  #header .alerts {
+    display: inline-block;
+    padding: 0 10px;
+    color: #20769B; }
+  #header .adder {
+    display: inline-block; }
+  #header .adder > .form-inline, #header .adder > .navbar-form {
+    display: inline-block; }
+    #header .adder > .form-inline .form-group > input[type='text'].form-control, #header .adder > .navbar-form .form-group > input[type='text'].form-control {
+      display: inline-block;
+      height: 40px;
+      margin: 0;
+      padding: 0 20px;
+      border: none;
+      background: #8ADCFF;
+      box-shadow: none;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      color: #20769B; }
+      #header .adder > .form-inline .form-group > input[type='text'].form-control::-webkit-input-placeholder, #header .adder > .navbar-form .form-group > input[type='text'].form-control::-webkit-input-placeholder {
+        color: #4ab3e0;
+        font-weight: 300; }
+      #header .adder > .form-inline .form-group > input[type='text'].form-control:-moz-placeholder, #header .adder > .navbar-form .form-group > input[type='text'].form-control:-moz-placeholder {
+        color: #4ab3e0;
+        font-weight: 300; }
+      #header .adder > .form-inline .form-group > input[type='text'].form-control::-moz-placeholder, #header .adder > .navbar-form .form-group > input[type='text'].form-control::-moz-placeholder {
+        color: #4ab3e0;
+        font-weight: 300; }
+      #header .adder > .form-inline .form-group > input[type='text'].form-control:-ms-input-placeholder, #header .adder > .navbar-form .form-group > input[type='text'].form-control:-ms-input-placeholder {
+        color: #4ab3e0;
+        font-weight: 300; }
+    #header .adder > .form-inline .btn, #header .adder > .navbar-form .btn {
+      display: inline-block;
+      height: 40px;
+      background: #ff7c7c;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      box-shadow: none;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px; }
