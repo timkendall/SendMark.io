@@ -6346,16 +6346,16 @@ td.visible-print {
 /** Palette Colors **/
 /** Theme Colors **/
 body {
-  font-family: sans-serif;
-  color: #484c55; }
+  font-family: "Lato";
+  color: #555555; }
 
 /** Reset goes here **/
 /** Typography - Import font here **/
 h1, h2, h3, h4, h5, time {
   font-family: "Lato";
-  font-size: 18px;
+  font-size: 36px;
   font-weight: 700;
-  color: #484c55; }
+  color: #555555; }
 
 h2 {
   font-size: 16px; }
@@ -6373,16 +6373,17 @@ h4 {
   font-weight: 700; }
 
 h5, time {
-  font-size: 13px;
-  font-weight: 300;
-  color: #b5b5b5; }
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 28px;
+  color: #5A5A5A; }
 
 p {
   font-family: "Lato";
   font-size: 14px;
   line-height: 135%;
   font-weight: 400;
-  color: #484c55;
+  color: #555555;
   text-rendering: optimizeLegibility; }
 
 /** Button styles **/
@@ -6619,7 +6620,7 @@ p {
     padding: 12px 14px;
     vertical-align: middle;
     background: #e8e8e8;
-    color: #5f6571;
+    color: #6e6e6e;
     border: 1px solid #249ed2;
     border-right: 1px solid #cfcfcf;
     border-top-left-radius: 4px;
@@ -7230,10 +7231,28 @@ html {
   -webkit-justify-content: center;
   justify-content: center; }
 
+.content-center-horizontal {
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start; }
+
+.fixed {
+  position: absolute;
+  display: block !important; }
+
 #header {
-  background: #34AADC; }
+  background: #34AADC;
+  overflow: hidden; }
   #header .account {
-    display: inline-block;
+    display: block;
+    float: left;
     padding: 0px 10px;
     background: #20769B; }
     #header .account img#avatar {
@@ -7256,25 +7275,41 @@ html {
       #header .account h4 .caret {
         margin: 0 0 0 8px;
         border-top-color: rgba(255, 255, 255, 0.5); }
+    #header .account .btn-group, #header .account .btn, #header .account .dropdown-toggle {
+      margin: 0;
+      padding: 0;
+      line-height: 40px;
+      height: 40px; }
   #header .account:hover {
     cursor: pointer;
     background: #1c6686; }
   #header .alerts {
-    display: inline-block;
+    display: block;
     padding: 0 10px;
-    color: #20769B; }
+    float: left; }
+    #header .alerts a {
+      color: #20769B;
+      font-size: 18px;
+      line-height: 40px; }
+    #header .alerts a:hover {
+      color: #1c6686; }
   #header .adder {
-    display: inline-block; }
+    display: block;
+    float: left; }
   #header .adder > .form-inline, #header .adder > .navbar-form {
-    display: inline-block; }
+    display: block; }
+    #header .adder > .form-inline .form-group, #header .adder > .navbar-form .form-group {
+      float: left; }
     #header .adder > .form-inline .form-group > input[type='text'].form-control, #header .adder > .navbar-form .form-group > input[type='text'].form-control {
-      display: inline-block;
+      display: block;
       height: 40px;
       margin: 0;
       padding: 0 20px;
       border: none;
       background: #8ADCFF;
       box-shadow: none;
+      font-size: 13px;
+      min-width: 400px;
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
       border-bottom-left-radius: 0px;
@@ -7297,7 +7332,8 @@ html {
         color: #4ab3e0;
         font-weight: 300; }
     #header .adder > .form-inline .btn, #header .adder > .navbar-form .btn {
-      display: inline-block;
+      display: block;
+      float: left;
       height: 40px;
       background: #ff7c7c;
       color: #fff;
@@ -7313,3 +7349,91 @@ html {
       border-bottom-left-radius: 0px;
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px; }
+    #header .adder > .form-inline .btn:hover, #header .adder > .navbar-form .btn:hover {
+      background: #ff6262; }
+    #header .adder > .form-inline .btn:active, #header .adder > .navbar-form .btn:active, #header .adder > .form-inline .btn:focus, #header .adder > .navbar-form .btn:focus {
+      box-shadow: none; }
+
+#listsAndTags {
+  padding: 60px 0 0 0; }
+  #listsAndTags h5, #listsAndTags time {
+    margin: 0 0 0 48px;
+    padding-left: 12px; }
+  #listsAndTags ul {
+    margin-left: 48px;
+    padding: 0px;
+    list-style: none; }
+  #listsAndTags ul > li {
+    height: 28px; }
+  #listsAndTags ul > li > a {
+    display: block;
+    height: 28px;
+    padding-left: 12px;
+    list-style: none;
+    font-weight: 400;
+    font-size: 13px;
+    color: #555555;
+    line-height: 28px; }
+  #listsAndTags ul > li > a:hover, #listsAndTags ul > li.active > a {
+    padding-left: 10px;
+    color: #ff7c7c;
+    font-weight: 400;
+    text-decoration: none;
+    border-left: 2px solid #ff7c7c; }
+  #listsAndTags ul > li.active > a {
+    font-weight: 700; }
+  #listsAndTags ul#tags > li > a {
+    list-style: none;
+    font-weight: 300; }
+  #listsAndTags li.inbox > a {
+    font-size: 14px;
+    font-weight: 700; }
+
+#links {
+  margin-top: 60px;
+  font-size: 14px; }
+  #links h1, #links h2, #links h3, #links h4, #links h5, #links time {
+    display: inline-block;
+    margin-top: 0px; }
+  #links date {
+    display: inline-block;
+    font-weight: 300; }
+  #links .row > .col-md-8 > section {
+    width: 100%; }
+  #links .form-group {
+    margin-right: 10px;
+    clear: left; }
+  #links .form-group > input[type='text'].form-control {
+    display: block;
+    float: left;
+    width: 100%; }
+  #links .btn-group {
+    display: block; }
+  #links ul.actions {
+    float: right; }
+    #links ul.actions li {
+      list-style: none;
+      line-height: 24px; }
+      #links ul.actions li a {
+        color: #555555;
+        font-weight: bold; }
+  #links .links ul {
+    margin-top: 0px;
+    padding: 0; }
+    #links .links ul li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-bottom: 1px solid #ccc;
+      height: 64px;
+      line-height: 64px; }
+  #links .links ul > li > a {
+    display: block;
+    height: 64px;
+    line-height: 64px;
+    font-size: 20px;
+    color: #555555; }
+  #links .links ul > li:hover > a {
+    text-decoration: none; }
+  #links .links ul > li:hover {
+    background: #fafafa; }

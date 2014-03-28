@@ -1,0 +1,52 @@
+#listsAndTags {
+  padding: 60px 0 0 0;
+
+  h5 {
+    margin: 0 0 0 48px;
+    padding-left: 12px;
+  }
+
+  ul {
+    margin-left: 48px;
+    padding: 0px;
+    list-style: none;
+  }
+
+  ul > li {
+    height: 28px;
+  }
+
+  ul > li > a {
+    display: block;
+    height: 28px;
+    padding-left: 12px;
+    list-style: none;
+    font-weight: $regular;
+    font-size: 13px;
+    color: $font-color;
+    line-height: 28px;
+  }
+
+  ul > li > a:hover,  ul > li.active > a {
+    padding-left: 10px;
+    color: $salmon-color;
+    font-weight: $regular;
+    text-decoration: none;
+    border-left: 2px solid $salmon-color;
+  }
+
+  ul > li.active > a {
+    font-weight: $bold;
+  }
+
+  ul#tags > li > a {
+    list-style: none;
+    font-weight: $light;
+  }
+
+  li.inbox > a {
+    font-size: 14px;
+    font-weight: $bold;
+  }
+
+}

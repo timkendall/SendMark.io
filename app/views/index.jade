@@ -1,13 +1,13 @@
 extends layouts/default
 
 block content
-  div.grid.columns.split350(ng-controller="IndexCtrl", ng-show='user.authorized')
-      aside.bar#lists-container(ng-include="'views/sidebar.html'", ng-controller="ListsCtrl")
-      section.content
-        div.grid.rows.split50.bottom
-          aside.bar#finder(ng-include="'views/finder.html'")
-          section.content#links-container
-            section(ng-view)
+  div.grid.rows.split40(ng-controller="IndexCtrl", ng-show='user.authorized')
+      div.bar.animated.slideInDown#header(ng-include="'views/header.html'")
+      div.content(ng-controller="ListsCtrl")
+        div.row
+          div.col-md-2#listsAndTags(ng-include="'views/sidebar.html'")
+          div.col-md-8#links(ng-view)
+          div.col-md-2
   section.centered#login(ng-hide='user.authorized')
     section(ng-view)
   script(type="text/javascript").

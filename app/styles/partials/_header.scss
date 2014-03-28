@@ -1,8 +1,10 @@
 #header {
   background: #34AADC;
+  overflow: hidden;
 
   .account {
-    display: inline-block;
+    display: block;
+    float: left;
     padding: 0px 10px;
     background: #20769B;
 
@@ -27,6 +29,13 @@
         border-top-color: rgba(255,255,255,0.5);
       }
     }
+
+    .btn-group, .btn, .dropdown-toggle {
+      margin: 0;
+      padding: 0;
+      line-height: 40px;
+      height: 40px;
+    }
   }
 
   .account:hover {
@@ -35,26 +44,43 @@
   }
 
   .alerts {
-    display: inline-block;
+    display: block;
     padding: 0 10px;
-    color: #20769B;
+    float: left;
+
+    a {
+      color: #20769B;
+      font-size: 18px;
+      line-height: 40px;
+    }
+
+    a:hover {
+      color: darken(#20769B, 5%);
+    }
   }
 
   .adder {
-   display: inline-block;
+   display: block;
+   float: left;
   }
 
   .adder > .form-inline {
-    display: inline-block;
+    display: block;
+
+    .form-group {
+      float: left;
+    }
 
     .form-group > input[type='text'].form-control {
-      display: inline-block;
+      display: block;
       height: 40px;
       margin: 0;
       padding: 0 20px;
       border: none;
       background: #8ADCFF;
       box-shadow: none;
+      font-size: 13px;
+      min-width: 400px;
       @include border-top-radius(0px);
       @include border-bottom-radius(0px);
       @include border-left-radius(0px);
@@ -68,7 +94,8 @@
     }
 
     .btn {
-      display: inline-block;
+      display: block;
+      float: left;
       height: 40px;
       background: $secondary-color;
       color: #fff;
@@ -80,6 +107,14 @@
       @include border-bottom-radius(0px);
       @include border-left-radius(0px);
       @include border-right-radius(0px);
+    }
+
+    .btn:hover {
+      background: darken($secondary-color, 5%);
+    }
+
+    .btn:active, .btn:focus {
+      box-shadow: none;
     }
   }
 }

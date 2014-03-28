@@ -1,20 +1,36 @@
-<section data-ng-controller="ListsCtrl" data-ng-init="findOne()">
-    <!-- List info -->
+<!-- List header -->
+<section class="fixed clearfix">
 
-    <!-- Show edit/delet buttons if user is list creator -->
-    <a class="btn btn-default" data-ng-click="remove();">
-        <i class="fa fa-trash-o"></i> Delete List
-    </a>
-    <!-- List links in list -->
-    <ul>
-        <li ng-repeat="link in list._items | filter:search | orderBy:'url'">
-            <h2><a ng-href="{{link.url}}" target="_blank">{{link.url}}</a></h2>
-            <time>{{link.created}}</time>
-        </li>
-    </ul>
+  <ul class="actions pull-right">
+    <li>{{list.count}} items</li>
+    <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
+    <li><a data-ng-click="remove()" href=""><i class="fa fa-times"></i> Delete</a></li>
+  </ul>
 
-    <input type="text" class="form-control" id="inputKeys" ng-model="search" placeholder="Keywords">
+  <section class="pull-left">
+    <h1>{{list.name}}</h1>
+    <date>last modified ...</date>
+  </section>
 
-    <h2 ng-hide="!list._items || list._items.length">No links yet.</h1>
+  <section class="clearfix">
+    <div class="form-group pull-left">
+      <input type="text" class="form-control" ng-model="search" id="filterLinks" placeholder="Search">
+    </div>
+    <div class="btn-group pull-left">
+      <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
+      <button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
+    </div>
+  </section>
+</section>
+
+<section class="links" data-ng-init="findOne()">
+  <!-- List links in list -->
+  <ul>
+    <li ng-repeat="link in list._items | filter:search | orderBy:'url'">
+      <a ng-href="{{link.url}}" target="_blank">{{link.url}}</a>
+    </li>
+  </ul>
+
+  <h2 ng-hide="!list._items || list._items.length">No links yet.</h1>
 
 </section>

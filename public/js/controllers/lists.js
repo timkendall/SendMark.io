@@ -3,9 +3,10 @@
 angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', function ($scope, $routeParams, $location, $http, Global, Lists) {
 	$scope.global = Global;
 	$scope.lists = [];
+	$scope.list = null;
 
 	// Highlight Current List
-	$scope.isActive = function(listId) {
+	$scope.isActive = function (listId) {
 		return ( '/lists/' + listId ) === $location.path();
 	};
 
@@ -15,7 +16,6 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
     alert(data.link);
   });*/
 
-  $scope.search = 'a';
 
 	$scope.create = function() {
 		var list = new Lists({
@@ -28,20 +28,18 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 		this.name = '';
 	};
 
-	$scope.remove = function(list) {
-		if (list) {
-			list.$remove();
+	$scope.remove = function () {
+		// Remove remote
+		$scope.list.$remove();
 
-			for (var i in $scope.lists) {
-				if ($scope.lists[i] === list) {
-					$scope.lists.splice(i, 1);
-				}
+		// Remove local
+		for (var i = 0; i < $scope.lists.length; ++i) {
+			if ($scope.lists[i]._id === $scope.list._id && $scope.lists[i].name !== 'Uncategorized') {
+				$scope.lists.splice(i, 1);
 			}
 		}
-		else {
-			$scope.list.$remove();
-			$location.path('lists');
-		}
+
+		$location.path('lists');
 	};
 
 	$scope.update = function() {
@@ -76,7 +74,7 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 	$scope.findOne = function() {
 		Lists.get({
 			listId: $routeParams.listId
-		}, function(list) {
+		}, function (list) {
 			$scope.list = list;
 		});
 	};
