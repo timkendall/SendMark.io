@@ -18,13 +18,6 @@ UserApp.initialize({
 var mailListener;
   Mailman = new SendMarkMailman();
 
-if (!String.prototype.trim) {
-   //code for trim
-   String.prototype.trim = function(){
-    return this.replace(/^\s+|\s+$/g, '');
-   };
-}
-
 exports.configListener = function() {
   mailListener = new MailListener({
     username: "sendmarkadd@gmail.com",
