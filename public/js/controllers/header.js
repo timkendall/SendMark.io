@@ -1,15 +1,12 @@
 'use strict';
 
-angular.module('SendMark.system').controller('HeaderController', ['$scope', 'Global', function ($scope, Global) {
-    $scope.global = Global;
+angular.module('SendMark.system').controller('HeaderCtrl', ['$scope', '$location', 'Global', function ($scope, $location, Global) {
+  $scope.global = Global;
 
-    $scope.menu = [{
-        'title': 'Lists',
-        'link': 'lists'
-    }, {
-        'title': 'Create New List',
-        'link': 'lists/create'
-    }];
+  // Highlight Current Route
+  $scope.isActive = function (route) {
+    return route === $location.path();
+  };
 
-    $scope.isCollapsed = false;
+  $scope.isCollapsed = false;
 }]);

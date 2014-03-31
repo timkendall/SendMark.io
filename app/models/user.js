@@ -28,11 +28,7 @@ var UserSchema = new Schema({
 	lastLoginAt: Date,
 	updatedAt: Date,
 	createdAt: Date,
-	_raw: { /* raw UserApp User profile */ },
-	_lists: [{
-		type: Schema.ObjectId,
-		ref: 'List'
-	}]
+	_raw: { /* raw UserApp User profile */ }
 });
 
 /**

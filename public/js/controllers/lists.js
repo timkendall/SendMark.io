@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', function ($scope, $routeParams, $location, $http, Global, Lists) {
+angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParams', '$location', '$http', 'Global', 'Lists', '$modal', '$log', function ($scope, $routeParams, $location, $http, Global, Lists, $modal, $log) {
 	$scope.global = Global;
-	$scope.lists = [];
-	$scope.list = null;
+	$scope.global.lists;
+	$scope.global.list;
 
 	// Highlight Current List
 	$scope.isActive = function (listId) {
@@ -17,12 +17,13 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
   });*/
 
 
-	$scope.create = function() {
+	$scope.create = function () {
 		var list = new Lists({
 			name: this.name
 		});
 		list.$save(function(response) {
 			$location.path('lists/' + response._id);
+			$scope.global.lists.push(list);
 		});
 
 		this.name = '';
@@ -30,12 +31,12 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 
 	$scope.remove = function () {
 		// Remove remote
-		$scope.list.$remove();
+		$scope.global.list.$remove();
 
 		// Remove local
-		for (var i = 0; i < $scope.lists.length; ++i) {
-			if ($scope.lists[i]._id === $scope.list._id && $scope.lists[i].name !== 'Uncategorized') {
-				$scope.lists.splice(i, 1);
+		for (var i = 0; i < $scope.global.lists.length; ++i) {
+			if ($scope.global.lists[i]._id === $scope.global.list._id && $scope.global.lists[i].name !== 'Uncategorized') {
+				$scope.global.lists.splice(i, 1);
 			}
 		}
 
@@ -43,7 +44,7 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 	};
 
 	$scope.update = function() {
-		var list = $scope.list;
+		var list = $scope.global.list;
 		if (!list.updated) {
 			list.updated = [];
 		}
@@ -56,26 +57,18 @@ angular.module('SendMark.lists').controller('ListsCtrl', ['$scope', '$routeParam
 
 	$scope.find = function() {
 
-		/*
-		Lists.query(function(lists) {
-			$scope.lists = lists.lists;
+		Lists.query(function (lists) {
+			if (!lists) alert('Failed to load lists.');
+			$scope.global.lists = lists;
 		});
-		*/
-		$http({method: 'GET', url: '/lists'}).
-			success(function(data, status, headers, config) {
-				//The API call to the back-end was successful (i.e. a valid session)
-				$scope.lists = data;
-			}).
-			error(function(data, status, headers, config) {
-				//alert("The API call to the back-end was NOT successful (i.e. an invalid session).");
-			});
+
 	};
 
 	$scope.findOne = function() {
 		Lists.get({
 			listId: $routeParams.listId
 		}, function (list) {
-			$scope.list = list;
+			$scope.global.list = list;
 		});
 	};
 }]);

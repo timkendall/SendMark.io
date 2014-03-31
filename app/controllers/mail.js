@@ -6,7 +6,14 @@ var MailListener = require("mail-listener2"),
     User = mongoose.model('User'),
     List = mongoose.model('List'),
     Link = mongoose.model('Link'),
+    config = require('../../config/config'),
+    UserApp = require('userapp'),
     SendMarkMailman = require("sendmark-mailman").Mailman;
+
+// Initialzie UserApp
+UserApp.initialize({
+  app_id: '52e93bb22f2fa'
+});
 
 var mailListener;
   Mailman = new SendMarkMailman();
@@ -98,25 +105,48 @@ exports.configListener = function() {
       if (!user) {
         // Todo: Send invite to unregistered user
 
-        console.log(senderAddress + ' is not a registered user.');
-      } else {
-        // Extract Links and Generate Link Objects
-        Mailman.extractLinks(user, mail, function (links) {
-          if (!links) return;
+        // Maybe we don't have local copy cached, check UserApp
+        UserApp.User.search({
+          "page": 1,
+          "page_size": 1,
+          "fields": "mixed",
+          "filters": [
+            {
+              "email": mail.sender
+            }
+          ]
+        }, function (error, result) {
+            console.log("UserApp: " + JSON.stringify(error) + " -- " + result);
+            // Handle error/result
+            if (!result) return;
+            if (result.length > 1) return;
 
-          // Print links to console (should also save to console so we can see how we're doing on parsing (i.e Winston). )
-          links.forEach(function (link, index, array) {
-            console.log(link);
-          });
-
-          // Save Links, save links to categories
-          // [OPTIMIZATION] Alredy have Link objects, just 'save' instead of create?
-          Link.create( links, function (error) {
-            if (error) return console.log(error);
-            console.log('Saved link for ' + user.email);
-          });
+            user = result[0];
         });
       }
+
+      if (!user) {
+        console.log(senderAddress + ' is not a registered user.');
+        return;
+      }
+
+      // Extract Links and Generate Link Objects
+      Mailman.extractLinks(user, mail, function (links) {
+        if (!links) return;
+
+        // Print links to console (should also save to console so we can see how we're doing on parsing (i.e Winston). )
+        links.forEach(function (link, index, array) {
+          console.log(link);
+        });
+
+        // Save Links, save links to categories
+        // [OPTIMIZATION] Alredy have Link objects, just 'save' instead of create?
+        Link.create( links, function (error) {
+          if (error) return console.log(error);
+          console.log('Saved link for ' + user.email);
+        });
+      });
+
     });
 
   });
@@ -150,7 +180,6 @@ exports.parse = function (req, res) {
       if (err) console.log(err);
       if (!user) {
         // Todo: Send invite to unregistered user
-
         console.log(mail.sender + ' is not a registered user.');
       } else {
         // Extract Links and Generate Link Objects

@@ -38,14 +38,14 @@ module.exports = function (passport, UserApp) {
   passport.use(
   new UserAppStrategy({
     appId: config.userapp.clientID
-  }, function handleUserProfile(userprofile, done) {
+  }, function handleUserProfile (userprofile, done) {
 
     process.nextTick(function () {
 
       console.log("userprofile.id: " + userprofile.id);
 
       // See if userprofile exists locally
-      User.load(userprofile.id, function createUpdateLocal(error, user) {
+      User.load(userprofile.id, function createUpdateLocal (error, user) {
         if (error) done(new Error(error));
         if (!user) {
 

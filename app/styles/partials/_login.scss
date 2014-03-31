@@ -1,0 +1,64 @@
+#login {
+  background: #fff;
+
+  h1 {
+    margin-bottom: 40px;
+    font-size: 40px;
+    text-align: center;
+    font-family: "Lato";
+  }
+
+  input {
+    width: 300px;
+    height: 44px;
+    padding: 12px 10px;
+    vertical-align: middle;
+    @include border-left-radius(0px);
+    @include border-right-radius(0px);
+
+    @include placeholder {
+      color: $secondary-font-color;
+    }
+  }
+  .input-group:first-child {
+    margin-bottom: 0px;
+  }
+
+  input[type='text'], input[type='password'] {
+    border: none;
+    border-bottom: 1px solid lighten($secondary-font-color, 20%);
+    box-shadow: none;
+  }
+
+  input[type='text']:focus, input[type='password']:focus {
+    border-left: 2px solid $primary-color;
+  }
+
+  h4 {
+    font-family: "Lato";
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+    color: $secondary-font-color;
+  }
+
+  .btn, .btn:hover#signup {
+    width: 100%;
+    background: $salmon-color;
+    color: #fff;
+    border: none;
+    line-height: 36px;
+    font-weight: $bold;
+  }
+
+  .btn:hover, .btn#signup {
+    background: darken($salmon-color, 5%);
+    color: rgba(255,255,255,1);
+  }
+
+  a {
+    color: darken($primary-color, 30%);
+    text-decoration: underline;
+    text-align: center;
+  }
+}

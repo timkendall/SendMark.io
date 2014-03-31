@@ -1,14 +1,15 @@
 <!-- List header -->
-<section class="fixed clearfix">
+<div ng-controller="ListsCtrl">
+<section class="clearfix links-header">
 
   <ul class="actions pull-right">
-    <li>{{list.count}} items</li>
+    <li>{{global.list.count}} items</li>
     <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
     <li><a data-ng-click="remove()" href=""><i class="fa fa-times"></i> Delete</a></li>
   </ul>
 
   <section class="pull-left">
-    <h1>{{list.name}}</h1>
+    <h1>{{global.list.name}}</h1>
     <date>last modified ...</date>
   </section>
 
@@ -26,11 +27,12 @@
 <section class="links" data-ng-init="findOne()">
   <!-- List links in list -->
   <ul>
-    <li ng-repeat="link in list._items | filter:search | orderBy:'url'">
+    <li ng-repeat="link in global.list._items | filter:search | orderBy:'url'">
       <a ng-href="{{link.url}}" target="_blank">{{link.url}}</a>
     </li>
   </ul>
 
-  <h2 ng-hide="!list._items || list._items.length">No links yet.</h1>
+  <h2 ng-hide="!global.list._items || global.list._items.length">No links yet.</h1>
 
 </section>
+</div>

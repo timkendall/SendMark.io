@@ -13,8 +13,11 @@ angular.module('SendMark').config(['$routeProvider',
             templateUrl: 'views/users/signup.html',
             public: true
         }).
-        when('/lists', {
-            templateUrl: 'views/lists/all.html'
+        when('/settings', {
+            templateUrl: 'views/users/settings.html'
+        }).
+        when('/inbox', {
+            templateUrl: 'views/inbox.html'
         }).
         when('/lists/create', {
             templateUrl: 'views/lists/create.html'
@@ -44,4 +47,20 @@ angular.module('SendMark').config(['$locationProvider',
 // Initialize UserApp
 angular.module('SendMark').run(function($rootScope, user) {
     user.init({ appId: '52e93bb22f2fa' });
+});
+
+// Refresh user's lists on every route change
+angular.module('SendMark').run(function ($rootScope, $location, Global, Lists) {
+   $rootScope.$watch(function () {
+      return $location.path();
+    },
+    function (path) {
+      if (!$rootScope.user.authorized) return;
+
+      // Get Lists
+      Lists.query(function (lists) {
+        if (!lists) alert('Failed to load lists.');
+        Global.lists = lists;
+      });
+    });
 });

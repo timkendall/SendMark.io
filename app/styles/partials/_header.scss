@@ -1,16 +1,25 @@
 #header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  padding: 0;
   background: #34AADC;
-  overflow: hidden;
+  // GPU Accelerate
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 
   .account {
     display: block;
-    float: left;
-    padding: 0px 10px;
+    //float: left;
     background: #20769B;
 
     img#avatar {
       display: inline-block;
-      margin: 0 8px 0 0;
+      margin: 0 8px;
       @include border-top-radius(999px);
       @include border-bottom-radius(999px);
       @include border-left-radius(999px);
@@ -22,6 +31,7 @@
       display: inline-block;
       color: #fff;
       margin: 0px;
+      padding: 0px 10px 0 0;
       line-height: 40px;
 
       .caret {
@@ -30,11 +40,22 @@
       }
     }
 
-    .btn-group, .btn, .dropdown-toggle {
-      margin: 0;
-      padding: 0;
-      line-height: 40px;
-      height: 40px;
+    a.dropdown-toggle {
+      display: inline-block;
+      padding: 15px;
+      padding: 0px;
+    }
+
+    a.dropdown-toggle:hover, a.dropdown-toggle:active, a.dropdown-toggle:focus {
+      background: darken(#20769B, 5%);
+    }
+
+    li.dropdown.open > a.dropdown-toggle {
+      background: darken(#20769B, 5%);
+    }
+
+    .dropdown-menu {
+      z-index: 99999 !important;
     }
   }
 
@@ -43,10 +64,13 @@
     background: darken(#20769B, 5%);
   }
 
-  .alerts {
+  .inbox {
     display: block;
+    height: 40px;
+    overflow: hidden;
     padding: 0 10px;
-    float: left;
+    line-height: 40px;
+    float:left;
 
     a {
       color: #20769B;
@@ -59,12 +83,20 @@
     }
   }
 
+  .inbox.active {
+    background: $salmon-color;
+
+    a, a:hover {
+      color: #fff;
+    }
+  }
+
   .adder {
    display: block;
    float: left;
   }
 
-  .adder > .form-inline {
+  .adder {
     display: block;
 
     .form-group {

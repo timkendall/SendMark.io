@@ -1,0 +1,89 @@
+        <!-- Hammer reload -->
+          <script>
+            setInterval(function(){
+              try {
+                if(typeof ws != 'undefined' && ws.readyState == 1){return true;}
+                ws = new WebSocket('ws://'+(location.host || 'localhost').split(':')[0]+':35353')
+                ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+                ws.onmessage = function(){
+                  var links = document.getElementsByTagName('link'); 
+                    for (var i = 0; i < links.length;i++) { 
+                    var link = links[i]; 
+                    if (link.rel === 'stylesheet' && !link.href.match(/typekit/)) { 
+                      href = link.href.replace(/((&|\?)hammer=)[^&]+/,''); 
+                      link.href = href + (href.indexOf('?')>=0?'&':'?') + 'hammer='+(new Date().valueOf());
+                    }
+                  }
+                }
+              }catch(e){}
+            }, 1000)
+          </script>
+        <!-- /Hammer reload -->
+      
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SendMark - Development - SendMark - Development</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="keywords" content="bookmark, email, save">
+    <meta name="description" content="SendMark - Bookmark content by email.">
+    <link href="/img/icons/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta property="fb:app_id" content="APP_ID">
+    <meta property="og:title" content="SendMark - Development - SendMark - Development">
+    <meta property="og:description" content="SendMark - Bookmark content by email.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="APP_URL">
+    <meta property="og:image" content="APP_LOGO">
+    <meta property="og:site_name" content="SendMark - Bookmark content by email.">
+    <meta property="fb:admins" content="APP_ADMIN">
+    <link rel="stylesheet" href="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/app/components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/app/styles/Build/app.css">
+    <!--if lt IE 9script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+    -->
+  </head>
+  <body>
+
+    <div class="content">
+      <div class="row">
+        <div class="col-md-2" id="listsAndTags">
+        </div>
+        <div class="col-md-8" id="links">
+
+          <section class="content-center-rows" id="login">
+
+      <form ua-login ua-error="error-msg">
+        <h1>S</i></h1>
+
+          <div class="form-group">
+            <div class="input-group">
+                <input name="login" type="text" class="form-control" placeholder="Username">
+
+            </div>
+
+            <div class="input-group">
+              <input name="password" type="password" class="form-control" placeholder="Password">
+
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-default">Log in</button>
+
+          <p id="error-msg"></p>
+      </form>
+
+      <h4 id="error-msg">Incorrect password</h4>
+
+      <a href="#!/signup" class="">Sign up for free!</a>
+
+    </section>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

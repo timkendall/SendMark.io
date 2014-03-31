@@ -1,7 +1,7 @@
 /** Main styles go here **/
 
 // Third-party
-@import "../components/Font-Awesome/scss/font-awesome";
+//@import "../components/Font-Awesome/scss/font-awesome";
 @import "../components/sass-bootstrap/lib/bootstrap";
 
 // Modules and Variables
@@ -16,3 +16,4 @@
 @import "partials/header";
 @import "partials/sidebar";
 @import "partials/content";
+@import "partials/login";

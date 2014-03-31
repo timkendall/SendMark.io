@@ -123,8 +123,6 @@ ListSchema.methods = {
  */
 
 ListSchema.statics.loadAllOfUsers = function(user, cb) {
-	console.log(user.username);
-
 	this.find({
 		_creator: user._id
 	}).populate('_creator _items').exec(cb);

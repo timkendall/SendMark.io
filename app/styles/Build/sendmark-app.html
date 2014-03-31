@@ -1,3 +1,25 @@
+        <!-- Hammer reload -->
+          <script>
+            setInterval(function(){
+              try {
+                if(typeof ws != 'undefined' && ws.readyState == 1){return true;}
+                ws = new WebSocket('ws://'+(location.host || 'localhost').split(':')[0]+':35353')
+                ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+                ws.onmessage = function(){
+                  var links = document.getElementsByTagName('link'); 
+                    for (var i = 0; i < links.length;i++) { 
+                    var link = links[i]; 
+                    if (link.rel === 'stylesheet' && !link.href.match(/typekit/)) { 
+                      href = link.href.replace(/((&|\?)hammer=)[^&]+/,''); 
+                      link.href = href + (href.indexOf('?')>=0?'&':'?') + 'hammer='+(new Date().valueOf());
+                    }
+                  }
+                }
+              }catch(e){}
+            }, 1000)
+          </script>
+        <!-- /Hammer reload -->
+      
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
   <head>
@@ -17,41 +39,63 @@
     <meta property="og:image" content="APP_LOGO">
     <meta property="og:site_name" content="SendMark - Bookmark content by email.">
     <meta property="fb:admins" content="APP_ADMIN">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/app/components/animate.css/animate.min.css">
     <link rel="stylesheet" href="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/app/styles/Build/app.css">
     <!--if lt IE 9script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
     -->
   </head>
   <body>
-    <div class="grid rows split40">
-      <div class="bar animated slideInDown" id="header">
-        <section class="account btn-group">
-          <div class="btn dropdown-toggle" data-toggle="accountDropdown">
-            <img id="avatar" src="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/public/img/avatar.jpeg" width="24" height="24">
-            <h4>Tim Kendall <span class="caret"></span></h4>
-          </div>
+    <!-- Header -->
 
-          <ul class="account-dropdown-menu" role="menu">
-            <li><a href="#">Settings</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </section>
+<nav class="navbar-static-top" id="header">
+  <div class="container-fluid" ng-controller="HeaderCtrl">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
 
-        <section class="alerts">
+      <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <section class="account btn-group">
+        <!-- Big button for dropdown -->
+        <a class="dropdown-toggle">
+          <img id="avatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}" width="24" height="24">
+          <h4>Tim Kendall<span class="caret"></span></h4>
+        </a>
+        <!-- Dropdown content -->
+        <ul class="dropdown-menu" role="menu">
+          <li>Settings</li>
+          <li class="divider"></li>
+          <li>
+            <a href="#!/login" ua-logout><i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" collapse="isCollapsed">
+
+      <section class="alerts">
+        <li class="alerts">
           <a href=""><i class="fa fa-inbox"></i></a>
-        </section>
+        </li>
+      </ul>
 
-        <section class="adder">
-          <form class="form-inline" role="form">
-            <div class="form-group">
-              <input type="text" class="form-control" id="newLink" placeholder="ex. http://sendmark.io @apps @checkit #awesome">
-            </div>
-            <button type="submit" class="btn btn-default">Add</button>
-          </form>
-        </section>
-      </div>
+      <form class="adder" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" id="newLink" placeholder="ex. http://sendmark.io @apps @checkit #awesome">
+        </div>
+        <button type="submit" class="btn btn-default">Add</button>
+      </form>
 
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
       <div class="content">
         <!-- Responsive 3 column grid -->
         <div class="row">
