@@ -6,7 +6,9 @@
 var mongoose = require('mongoose'),
 		Schema = mongoose.Schema,
 		List,
-		_ = require('lodash');
+		_ = require('lodash'),
+		request = require('request'),
+		cheerio = require('cheerio');
 
 process.nextTick(function() {
 	List = mongoose.model('List');
@@ -16,6 +18,10 @@ process.nextTick(function() {
  * List Schema
  */
 var LinkSchema = new Schema({
+		title: {
+			type: String,
+			default: ''
+		},
 		url: {
 				type: String,
 				required: true
@@ -64,7 +70,20 @@ LinkSchema.pre('save', function (next) {
 	if (!validatePresenceOf(this.url))
 		next(new Error('Missing link URL'));
 
-	next();
+	// Get page title
+	request(self.url, function (error, response, html) {
+	  if (error || response.statusCode !== 200) return;
+
+	  // Extract page title
+	  var $ = cheerio.load(html);
+	  var title = $('title').text();
+
+	  // Save to doc
+	  self.title = title;
+
+	  next();
+
+	});
 });
 
 LinkSchema.post('save', function (doc) {
@@ -77,6 +96,8 @@ LinkSchema.post('save', function (doc) {
 			list.addItem(doc._id);
 		});
 	});
+
+
 });
 
 LinkSchema.post('remove', function (doc) {

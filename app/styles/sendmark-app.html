@@ -27,8 +27,8 @@
   <body>
     <!-- Header -->
 
-<nav class="navbar-static-top" id="header">
-  <div class="container-fluid" ng-controller="HeaderCtrl">
+<!-- Header -->
+<div class="container-fluid" id="header" ng-controller="HeaderCtrl">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
 
@@ -39,31 +39,31 @@
         <span class="icon-bar"></span>
       </button>
 
-      <section class="account btn-group">
+      <ul class="nav navbar-nav account">
+        <li class="dropdown">
         <!-- Big button for dropdown -->
         <a class="dropdown-toggle">
           <img id="avatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}" width="24" height="24">
-          <h4>Tim Kendall<span class="caret"></span></h4>
+          <h4>{{user.login}} <span class="caret"></span></h4>
         </a>
         <!-- Dropdown content -->
-        <ul class="dropdown-menu" role="menu">
-          <li>Settings</li>
+        <ul class="dropdown-menu" >
+          <li><a href="#!/settings" ng-class='{active: isActive("/settings")}'>Settings</a></li>
           <li class="divider"></li>
           <li>
             <a href="#!/login" ua-logout><i class="fa fa-sign-out"></i> Logout</a>
           </li>
         </ul>
-      </section>
+        </li>
+      </ul>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" collapse="isCollapsed">
 
-      <section class="alerts">
-        <li class="alerts">
-          <a href=""><i class="fa fa-inbox"></i></a>
-        </li>
-      </ul>
+      <section class="inbox" ng-class='{active: isActive("/inbox")}'>
+        <a href="#!/inbox"><i class="fa fa-inbox"></i></a>
+      </section>
 
       <form class="adder" role="search">
         <div class="form-group">
@@ -74,11 +74,10 @@
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
-</nav>
       <div class="content">
         <!-- Responsive 3 column grid -->
         <div class="row">
-          <div class="col-md-2 fixed" id="listsAndTags">
+          <div class="col-md-2" id="listsAndTags">
             <!-- sidebar -->
             <h5>LISTS</h5>
             <ul>
@@ -103,7 +102,7 @@
             <!-- main content -->
 
             <!-- List header -->
-            <section class="fixed clearfix">
+            <section class="clearfix">
 
               <ul class="actions pull-right">
                 <li>21 items</li>
@@ -130,7 +129,13 @@
             <!-- Links list/grid (scrollable!) -->
             <section class="links">
               <ul>
-                <li><a href="">http://userapp.io</a></li>
+                <li>
+                  <a href="">
+                    <h2>User Managment for Web and Mobile - UserApp</h2>
+                    <small>http://userapp.io <date>1 day ago</date></small>
+
+                  </a>
+                </li>
                 <li><a href="">http://medium.com</a></li>
                 <li><a href="">http://theindustry.cc</a></li>
                 <li><a href="">http://galengidman.com</a></li>

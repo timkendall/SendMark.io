@@ -5292,9 +5292,6 @@ p {
   #links h1, #links h2, #links h3, #links h4, #links h5, #links time {
     display: inline-block;
     margin-top: 0px; }
-  #links date {
-    display: inline-block;
-    font-weight: 300; }
   #links .row > .col-md-8 > section {
     width: 100%; }
   #links .form-group {
@@ -5318,18 +5315,39 @@ p {
     margin-top: 0px;
     padding: 0; }
     #links .links ul li {
+      display: block;
+      width: 100%;
       list-style: none;
       padding: 0;
       margin: 0;
-      border-bottom: 1px solid #ccc;
-      height: 64px;
-      line-height: 64px; }
+      border-bottom: 1px solid #ccc; }
   #links .links ul > li > a {
     display: block;
-    height: 64px;
-    line-height: 64px;
+    width: 100%;
+    padding: 20px 0;
     font-size: 20px;
     color: #555555; }
+    #links .links ul > li > a h2 {
+      display: block;
+      width: 100%;
+      font-size: 18px;
+      margin-bottom: 10px;
+      padding: 0px;
+      line-height: 14px; }
+    #links .links ul > li > a small {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      line-height: 14px;
+      margin-top: 0px;
+      color: #a2a2a2; }
+    #links .links ul > li > a date {
+      display: inline-block;
+      text-align: right;
+      float: right;
+      font-size: 12px;
+      line-height: 14px;
+      color: #a2a2a2; }
   #links .links ul > li:hover > a {
     text-decoration: none; }
   #links .links ul > li:hover {

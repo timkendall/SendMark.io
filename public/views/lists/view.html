@@ -27,8 +27,11 @@
 <section class="links" data-ng-init="findOne()">
   <!-- List links in list -->
   <ul>
-    <li ng-repeat="link in global.list._items | filter:search | orderBy:'url'">
-      <a ng-href="{{link.url}}" target="_blank">{{link.url}}</a>
+    <li ng-repeat="link in global.list._items | filter:search | orderBy:'created' | reverse">
+      <a ng-href="{{link.url}}" target="_blank">
+        <h2>{{link.title}}</h2>
+        <small>{{link.url}} <date am-time-ago="link.created" am-preprocess="unix"></date></small>
+      </a>
     </li>
   </ul>
 
