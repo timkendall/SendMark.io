@@ -26,10 +26,12 @@ $header-font-weight: $bold;
 
 // Extra
 $sidebar-width: 225px;
+$actions-bar-height: 80px;
 
 @import "modules/all";
 
 body {
     font-family: $fixed-font-family;
     color: $font-color;
+    height: 100%;
 }

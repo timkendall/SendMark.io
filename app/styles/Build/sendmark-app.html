@@ -39,7 +39,7 @@
     <meta property="og:image" content="APP_LOGO">
     <meta property="og:site_name" content="SendMark - Bookmark content by email.">
     <meta property="fb:admins" content="APP_ADMIN">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/app/components/animate.css/animate.min.css">
     <link rel="stylesheet" href="file://localhost/Users/Me/Dropbox/Projects/SendMark.io/app/styles/Build/app.css">
     <!--if lt IE 9script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
@@ -47,7 +47,7 @@
   </head>
   <body>
     <!-- Header -->
-
+<div class="wrap">
 <!-- Header -->
 <div class="container-fluid" id="header" ng-controller="HeaderCtrl">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -101,21 +101,23 @@
           <div class="col-md-2" id="listsAndTags">
             <!-- sidebar -->
             <h5>LISTS</h5>
-            <ul>
-              <li><a href="">Alpha</a></li>
+            <ul id="lists">
+              <li class="active"><a href="">Alpha</a></li>
               <li><a href="">Beta</a></li>
               <li><a href="">Charlie</a></li>
               <li><a href="">Delta</a></li>
+              <li></li>
             </ul>
 
-            <h5>TAGS</h5>
-            <ul id="tags">
-              <li><a href="">#Apps</a></li>
-              <li><a href="">#Boxes</a></li>
-              <li><a href="">#COOL</a></li>
-              <li><a href="">#Data</a></li>
-              <li><a href="">#Fires</a></li>
-              <li><a href="">#q</a></li>
+            <h5>MARKS</h5>
+            <ul id="marks">
+              <li><a href=""><span class="circle shadowed brown pull-left"></span> Read</a></li>
+              <li><a href=""><span class="circle shadowed red pull-left"></span> Watch</a></li>
+              <li><a href=""><span class="circle shadowed blue pull-left"></span> Listen</a></li>
+              <li><a href=""><span class="circle shadowed green pull-left"></span> Buy</a></li>
+              <li><a href=""><span class="circle shadowed yellow pull-left"></span> Eat</a></li>
+              <li><a href=""><span class="circle shadowed grey pull-left"></span> Do</a></li>
+
             </ul>
           </div>
 
@@ -124,12 +126,6 @@
 
             <!-- List header -->
             <section class="clearfix">
-
-              <ul class="actions pull-right">
-                <li>21 items</li>
-                <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
-                <li><a href=""><i class="fa fa-times"></i> Delete</a></li>
-              </ul>
 
               <section class="pull-left">
                 <h1>Beta</h1>
@@ -144,23 +140,47 @@
                   <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
                   <button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
                 </div>
+                <ul class="actions pull-right">
+                  <li>21 items</li>
+                  <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
+                  <li><a href=""><i class="fa fa-times"></i> Delete</a></li>
+              </ul>
               </section>
             </section>
 
             <!-- Links list/grid (scrollable!) -->
             <section class="links">
               <ul>
+                <li class="selected">
+                  <a href="">
+                    <h2>User Managment for Web and Mobile - UserApp</h2>
+                    <small>http://userapp.io <date>1 day ago</date></small>
+                  </a>
+                </li>
+                <li>
+                <a href="">
+                    <h2>User Managment for Web and Mobile - UserApp</h2>
+                    <small>http://userapp.io <date>1 day ago</date></small>
+                  </a>
+                </li>
                 <li>
                   <a href="">
                     <h2>User Managment for Web and Mobile - UserApp</h2>
                     <small>http://userapp.io <date>1 day ago</date></small>
-
                   </a>
                 </li>
-                <li><a href="">http://medium.com</a></li>
-                <li><a href="">http://theindustry.cc</a></li>
-                <li><a href="">http://galengidman.com</a></li>
-                <li><a href="">http://treehouse.org</a></li>
+                <li>
+                  <a href="">
+                    <h2>User Managment for Web and Mobile - UserApp</h2>
+                    <small>http://userapp.io <date>1 day ago</date></small>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <h2>User Managment for Web and Mobile - UserApp</h2>
+                    <small>http://userapp.io <date>1 day ago</date></small>
+                  </a>
+                </li>
               </ul>
             </section>
           </div>
@@ -170,5 +190,13 @@
           </div>
         </div>
     </div>
+</div>
+    <nav id="actions" class="content-center-rows">
+    <ul>
+      <li><i class="fa fa-tags"></i> <br> Categorize</li>
+      <li><i class="fa fa-dot-circle-o"></i> <br> Mark</li>
+      <li><i class="fa fa-trash-o"></i> <br> Delete</li>
+    </ul>
+    </nav>
   </body>
 </html>

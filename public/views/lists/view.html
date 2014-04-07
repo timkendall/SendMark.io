@@ -3,19 +3,18 @@
 <section class="clearfix links-header">
 
   <ul class="actions pull-right">
-    <li>{{global.list.count}} items</li>
+    <li><ng-pluralize count="global.list.count" when="{'0': '0 items', 'one':'1 item', 'other': '{} items'}"></ng-pluralize></li>
     <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
     <li><a data-ng-click="remove()" href=""><i class="fa fa-times"></i> Delete</a></li>
   </ul>
 
   <section class="pull-left">
     <h1>{{global.list.name}}</h1>
-    <date>last modified ...</date>
   </section>
 
   <section class="clearfix">
     <div class="form-group pull-left">
-      <input type="text" class="form-control" ng-model="search" id="filterLinks" placeholder="Search">
+      <input type="text" class="form-control" ng-model="search.title" id="filterLinks" placeholder="Search">
     </div>
     <div class="btn-group pull-left">
       <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
@@ -27,9 +26,9 @@
 <section class="links" data-ng-init="findOne()">
   <!-- List links in list -->
   <ul>
-    <li ng-repeat="link in global.list._items | filter:search | orderBy:'created' | reverse">
+    <li ng-repeat="link in global.list._items | filter:search | orderBy:'-created'">
       <a ng-href="{{link.url}}" target="_blank">
-        <h2>{{link.title}}</h2>
+        <h2>{{link.title || link.title}}</h2>
         <small>{{link.url}} <date am-time-ago="link.created" am-preprocess="unix"></date></small>
       </a>
     </li>

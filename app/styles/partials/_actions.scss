@@ -1,0 +1,63 @@
+nav#actions {
+  position: fixed;
+  bottom: 0px;
+  left:0px;
+  right:0px;
+  margin-bottom: (-$actions-bar-height);
+  @include animation(slideInUp 0.3s ease-in-out);
+  margin-bottom: 0px;
+  height: $actions-bar-height;
+  background: darken(#fff, 5%);
+
+  ul {
+    margin: 0px;
+
+    li {
+      display: inline-block;
+      cursor: pointer;
+      text-align: center;
+      margin-right: 40px;
+      color: darken($light-grey-color, 20%);
+      @include transition (color 0.1s ease-in-out);
+
+      i {
+        font-size: 18px;
+      }
+    }
+
+    li:last-child {
+      margin-right: 0px;
+    }
+
+    li:hover {
+      color: darken($light-grey-color, 40%);
+      @include transition (color 0.1s ease-in-out);
+    }
+  }
+
+}
+
+.slideInUp {
+  @include animation(slideInUp 0.3s ease-in);
+}
+
+
+@keyframes slideInUp {
+  from {
+    margin-bottom: (-$actions-bar-height);
+  }
+
+  to {
+    margin-bottom: 0px;
+  }
+}
+
+@-webkit-keyframes slideInUp {
+  from {
+    margin-bottom: (-$actions-bar-height);
+  }
+
+  to {
+    margin-bottom: 0px;
+  }
+}

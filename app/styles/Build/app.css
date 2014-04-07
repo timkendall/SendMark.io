@@ -5018,7 +5018,8 @@ td.visible-print {
 /** Theme Colors **/
 body {
   font-family: "Lato";
-  color: #555555; }
+  color: #555555;
+  height: 100%; }
 
 /** Reset goes here **/
 /** Typography - Import font here **/
@@ -5121,13 +5122,15 @@ p {
   display: block !important; }
 
 #header {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
   width: 100%;
   height: 40px;
   padding: 0;
   background: #34AADC;
+  z-index: 999;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -5247,6 +5250,57 @@ p {
     #header .adder .btn:active, #header .adder .btn:focus {
       box-shadow: none; }
 
+.circle {
+  margin: 7px 7px 0 0;
+  width: 14px;
+  height: 14px;
+  background: #b5b5b5;
+  border-radius: 90px;
+  -moz-border-radius: 90px;
+  -webkit-border-radius: 90px; }
+
+.shadowed {
+  display: block;
+  background: none; }
+
+.shadowed:after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 7px;
+  position: relative;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  left: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 90px 90px 0 0;
+  -moz-border-radius: 90px 90px 0 0;
+  -webkit-border-radius: 90px 90px 0 0;
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  -o-transform: rotate(30deg);
+  transform: rotate(30deg); }
+
+.red {
+  background: #f35656; }
+
+.green {
+  background: #65876C; }
+
+.blue {
+  background: #34aadc; }
+
+.yellow {
+  background: #ffb86c; }
+
+.brown {
+  background: #897361; }
+
+.grey {
+  background: #b5b5b5; }
+
 #listsAndTags {
   padding: 60px 0 0 0; }
   #listsAndTags h5, #listsAndTags time {
@@ -5266,22 +5320,31 @@ p {
     font-weight: 400;
     font-size: 13px;
     color: #555555;
-    line-height: 28px; }
+    line-height: 28px;
+    -webkit-transition: color 0.1s ease-out;
+    -moz-transition: color 0.1s ease-out;
+    transition: color 0.1s ease-out; }
   #listsAndTags ul > li > a:hover, #listsAndTags ul > li.active > a {
     padding-left: 10px;
-    color: #ff7c7c;
+    border-left: 2px solid #d4d4d4;
+    color: #222222;
     font-weight: 400;
     text-decoration: none;
-    border-left: 2px solid #ff7c7c; }
+    -webkit-transition: color 0.1s ease-in-out;
+    -moz-transition: color 0.1s ease-in-out;
+    transition: color 0.1s ease-in-out; }
   #listsAndTags ul > li.active > a {
+    color: #ff7c7c;
+    padding-left: 10px;
+    border-left: 2px solid #ff7c7c;
     font-weight: 700; }
-  #listsAndTags ul#tags > li > a {
+  #listsAndTags ul#marks > li > a {
     list-style: none;
     font-weight: 300; }
   #listsAndTags li.inbox > a {
     font-size: 14px;
     font-weight: 700; }
-  #listsAndTags li:last-child {
+  #listsAndTags ul#lists li:last-child {
     margin: 10px 0 0 12px; }
 
 #links {
@@ -5304,23 +5367,75 @@ p {
   #links .btn-group {
     display: block; }
   #links ul.actions {
-    float: right; }
+    margin: 0px; }
     #links ul.actions li {
+      display: inline-block;
+      margin-right: 8px;
       list-style: none;
       line-height: 24px; }
       #links ul.actions li a {
-        color: #555555;
-        font-weight: bold; }
+        color: #828282;
+        font-weight: bold;
+        -webkit-transition: color 0.1s ease-in-out;
+        -moz-transition: color 0.1s ease-in-out;
+        transition: color 0.1s ease-in-out; }
+      #links ul.actions li a:hover {
+        text-decoration: none;
+        color: #4f4f4f;
+        -webkit-transition: color 0.1s ease-in-out;
+        -moz-transition: color 0.1s ease-in-out;
+        transition: color 0.1s ease-in-out; }
+    #links ul.actions li:first-child {
+      font-weight: 300;
+      color: #999999; }
+    #links ul.actions li:last-child {
+      margin-right: 0px; }
   #links .links ul {
     margin-top: 0px;
     padding: 0; }
     #links .links ul li {
       display: block;
       width: 100%;
+      height: 78px;
       list-style: none;
       padding: 0;
       margin: 0;
+      border-top: 1px solid #ccc; }
+    #links .links ul li:first-child {
+      border-top: none; }
+    #links .links ul li:last-child {
       border-bottom: 1px solid #ccc; }
+    #links .links ul .selected {
+      border: 1px solid #ff7c7c;
+      padding: 0 15px 0 0;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px; }
+    #links .links ul .selected:before {
+      content: "\f00c";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: #fff;
+      line-height: 78px;
+      display: block;
+      float: left;
+      width: 25px;
+      height: 77px;
+      margin-right: 15px;
+      padding: 0 6px;
+      background: #ff7c7c; }
+    #links .links ul .selected + li {
+      border-top: none; }
+    #links .links ul .selected + .selected {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px; }
   #links .links ul > li > a {
     display: block;
     width: 100%;
@@ -5405,3 +5520,55 @@ p {
     color: #114c66;
     text-decoration: underline;
     text-align: center; }
+
+nav#actions {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: -80px;
+  -webkit-animation: slideInUp 0.3s ease-in-out;
+  -moz-animation: slideInUp 0.3s ease-in-out;
+  animation: slideInUp 0.3s ease-in-out;
+  margin-bottom: 0px;
+  height: 80px;
+  background: #f2f2f2; }
+  nav#actions ul {
+    margin: 0px; }
+    nav#actions ul li {
+      display: inline-block;
+      cursor: pointer;
+      text-align: center;
+      margin-right: 40px;
+      color: #828282;
+      -webkit-transition: color 0.1s ease-in-out;
+      -moz-transition: color 0.1s ease-in-out;
+      transition: color 0.1s ease-in-out; }
+      nav#actions ul li i {
+        font-size: 18px; }
+    nav#actions ul li:last-child {
+      margin-right: 0px; }
+    nav#actions ul li:hover {
+      color: #4f4f4f;
+      -webkit-transition: color 0.1s ease-in-out;
+      -moz-transition: color 0.1s ease-in-out;
+      transition: color 0.1s ease-in-out; }
+
+.slideInUp {
+  -webkit-animation: slideInUp 0.3s ease-in;
+  -moz-animation: slideInUp 0.3s ease-in;
+  animation: slideInUp 0.3s ease-in; }
+
+@keyframes slideInUp {
+  from {
+    margin-bottom: -80px; }
+
+  to {
+    margin-bottom: 0px; } }
+
+@-webkit-keyframes slideInUp {
+  from {
+    margin-bottom: -80px; }
+
+  to {
+    margin-bottom: 0px; } }

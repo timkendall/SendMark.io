@@ -22,6 +22,10 @@ var LinkSchema = new Schema({
 			type: String,
 			default: ''
 		},
+		description: {
+			type: String,
+			default: ''
+		},
 		url: {
 				type: String,
 				required: true
@@ -71,15 +75,21 @@ LinkSchema.pre('save', function (next) {
 		next(new Error('Missing link URL'));
 
 	// Get page title
-	request(self.url, function (error, response, html) {
-	  if (error || response.statusCode !== 200) return;
+	request(self.url, {rejectUnauthorized: false}, function (error, response, html) {
+	  if (error || response.statusCode !== 200) {
+	  	console.log(error);
+	  	//console.log(response.statusCode);
+	  	next();
+	  }
 
-	  // Extract page title
+	  // Extract page title and description
 	  var $ = cheerio.load(html);
 	  var title = $('title').text();
+	  var description = $('meta[property="og:description"]').attr('content');
 
 	  // Save to doc
 	  self.title = title;
+	  self.description = description;
 
 	  next();
 

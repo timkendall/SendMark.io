@@ -1,7 +1,7 @@
 <section ng-show='user.authorized' ng-controller="ListsCtrl">
   <h5>LISTS</h5>
 
-  <ul data-ng-init="find()">
+  <ul id="lists" data-ng-init="find()">
     <li ng-repeat="list in global.lists" ng-class='{ active: isActive(list._id)}'>
         <a ng-href="#!/lists/{{list._id}}">{{list.name}}</a>
     </li>
@@ -10,6 +10,16 @@
 
     <li ng-controller="ModalCreateListCtrl"><button type="button" class="btn btn-default btn-sm outline" ng-click="open()"><i class="fa fa-plus"></i> New</button></li>
   </ul>
+
+  <h5>MARKS</h5>
+    <ul id="marks">
+      <li><a href=""><span class="circle shadowed brown pull-left"></span> Read</a></li>
+      <li><a href=""><span class="circle shadowed red pull-left"></span> Watch</a></li>
+      <li><a href=""><span class="circle shadowed blue pull-left"></span> Listen</a></li>
+      <li><a href=""><span class="circle shadowed green pull-left"></span> Buy</a></li>
+      <li><a href=""><span class="circle shadowed yellow pull-left"></span> Eat</a></li>
+      <li><a href=""><span class="circle shadowed grey pull-left"></span> Do</a></li>
+    </ul>
 </h2>
 
 

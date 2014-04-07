@@ -1,3 +1,63 @@
+.circle {
+    margin: 7px 7px 0 0;
+    width: 14px;
+    height: 14px;
+    background: $light-grey-color;
+    border-radius: 90px;
+    -moz-border-radius: 90px;
+    -webkit-border-radius: 90px;
+}
+
+.shadowed {
+  display: block;
+  background: none;
+}
+
+.shadowed:after {
+    content: "";
+    display: block;
+    width: 14px;
+    height:7px;
+    position: relative;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    left: 2px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 90px 90px 0 0;
+    -moz-border-radius: 90px 90px 0 0;
+    -webkit-border-radius: 90px 90px 0 0;
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.red {
+  background: $red-color;
+}
+
+.green {
+  background: #65876C;
+}
+
+.blue {
+  background: $blue-color;
+}
+
+.yellow {
+  background: $orange-color;
+}
+
+.brown {
+  background: $brown-color;
+}
+
+.grey {
+  background: $light-grey-color;
+}
+
 #listsAndTags {
   padding: 60px 0 0 0;
 
@@ -25,21 +85,28 @@
     font-size: 13px;
     color: $font-color;
     line-height: 28px;
+
+     @include transition (color 0.1s ease-out);
   }
 
   ul > li > a:hover,  ul > li.active > a {
     padding-left: 10px;
-    color: $salmon-color;
+    border-left: 2px solid lighten(#555, 50%);
+    color: darken(#555, 20%);
     font-weight: $regular;
     text-decoration: none;
-    border-left: 2px solid $salmon-color;
+
+    @include transition (color 0.1s ease-in-out);
   }
 
   ul > li.active > a {
+    color: $salmon-color;
+    padding-left: 10px;
+    border-left: 2px solid $salmon-color;
     font-weight: $bold;
   }
 
-  ul#tags > li > a {
+  ul#marks > li > a {
     list-style: none;
     font-weight: $light;
   }
@@ -49,7 +116,7 @@
     font-weight: $bold;
   }
 
-  li:last-child {
+  ul#lists li:last-child {
     margin: 10px 0 0 12px;
   }
 
