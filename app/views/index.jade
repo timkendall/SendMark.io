@@ -8,5 +8,6 @@ block content
         div.col-md-2#listsAndTags(ng-include="'views/sidebar.html'")
         div.col-md-8#links(ng-view)
         div.col-md-2
+    nav.content-center-rows#actions(action, ng-include="'views/actions.html'", ng-controller="ActionsCtrl", ng-class="{visible: global.actionsIsOpen}")
   script(type="text/javascript").
     window.user = !{user};

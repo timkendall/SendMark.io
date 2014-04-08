@@ -5118,8 +5118,7 @@ p {
   justify-content: flex-start; }
 
 .fixed {
-  position: absolute;
-  display: block !important; }
+  position: fixed; }
 
 #header {
   position: fixed;
@@ -5351,7 +5350,11 @@ p {
   margin-top: 60px;
   font-size: 14px; }
   #links .links-header {
+    width: inherit;
+    background: #fff;
     border-bottom: 1px solid #ccc; }
+    #links .links-header h1, #links .links-header h2, #links .links-header h3, #links .links-header h4, #links .links-header h5, #links .links-header time {
+      text-align: right; }
   #links h1, #links h2, #links h3, #links h4, #links h5, #links time {
     display: inline-block;
     margin-top: 0px; }
@@ -5372,7 +5375,7 @@ p {
       display: inline-block;
       margin-right: 8px;
       list-style: none;
-      line-height: 24px; }
+      line-height: 33px; }
       #links ul.actions li a {
         color: #828282;
         font-weight: bold;
@@ -5396,76 +5399,114 @@ p {
     #links .links ul li {
       display: block;
       width: 100%;
-      height: 78px;
       list-style: none;
       padding: 0;
       margin: 0;
-      border-top: 1px solid #ccc; }
-    #links .links ul li:first-child {
+      border-top: 1px solid #ccc;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; }
+      #links .links ul li input[type=checkbox] {
+        display: none; }
+      #links .links ul li input[type=checkbox] + label {
+        float: left;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin-bottom: 0px; }
+      #links .links ul li input[type=checkbox] + label:before {
+        cursor: pointer;
+        content: "\f10c";
+        display: block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #fff;
+        line-height: 78px;
+        float: left;
+        width: 25px;
+        height: inherit;
+        margin-right: 15px;
+        text-align: center;
+        background: #e8e8e8;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out; }
+      #links .links ul li input[type=checkbox]:checked + label:before {
+        content: "\f00c";
+        background: #ff7c7c; }
+      #links .links ul li a {
+        display: block;
+        width: 100%;
+        padding: 20px 0;
+        font-size: 20px;
+        color: #555555;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out; }
+        #links .links ul li a h2 {
+          display: block;
+          width: 100%;
+          font-size: 18px;
+          margin-bottom: 10px;
+          padding: 0px;
+          line-height: 14px;
+          text-overflow: ellipsis;
+          white-space: nowrap; }
+        #links .links ul li a small {
+          display: block;
+          width: 100%;
+          font-size: 14px;
+          line-height: 14px;
+          margin-top: 0px;
+          color: #a2a2a2; }
+        #links .links ul li a date {
+          display: block;
+          text-align: right;
+          float: right;
+          font-size: 12px;
+          line-height: 14px;
+          color: #a2a2a2; }
+    #links .links ul li:first-child:not(.selected) {
       border-top: none; }
-    #links .links ul li:last-child {
+    #links .links ul li:last-child:not(.selected) {
       border-bottom: 1px solid #ccc; }
     #links .links ul .selected {
-      border: 1px solid #ff7c7c;
+      display: block;
       padding: 0 15px 0 0;
-      border-top-left-radius: 2px;
-      border-top-right-radius: 2px;
-      border-bottom-left-radius: 2px;
-      border-bottom-right-radius: 2px; }
-    #links .links ul .selected:before {
-      content: "\f00c";
-      font-family: FontAwesome;
-      font-style: normal;
-      font-weight: normal;
-      line-height: 1;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      color: #fff;
-      line-height: 78px;
-      display: block;
-      float: left;
-      width: 25px;
-      height: 77px;
-      margin-right: 15px;
-      padding: 0 6px;
-      background: #ff7c7c; }
+      border-top: 1px solid #ff7c7c; }
     #links .links ul .selected + li {
-      border-top: none; }
-    #links .links ul .selected + .selected {
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-      border-bottom-left-radius: 2px;
-      border-bottom-right-radius: 2px; }
-  #links .links ul > li > a {
-    display: block;
-    width: 100%;
-    padding: 20px 0;
-    font-size: 20px;
-    color: #555555; }
-    #links .links ul > li > a h2 {
-      display: block;
-      width: 100%;
-      font-size: 18px;
-      margin-bottom: 10px;
-      padding: 0px;
-      line-height: 14px; }
-    #links .links ul > li > a small {
-      display: block;
-      width: 100%;
-      font-size: 14px;
-      line-height: 14px;
-      margin-top: 0px;
-      color: #a2a2a2; }
-    #links .links ul > li > a date {
-      display: inline-block;
-      text-align: right;
-      float: right;
-      font-size: 12px;
-      line-height: 14px;
-      color: #a2a2a2; }
+      border-top: 1px solid #ff7c7c; }
+    @media screen and (max-width: 1100px) {
+      #links .links ul li input[type=checkbox] + label:before {
+        line-height: 62px;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out; }
+      #links .links ul li a {
+        padding: 14px 0;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out; }
+        #links .links ul li a h2 {
+          font-size: 16px;
+          margin-bottom: 6px; }
+        #links .links ul li a small {
+          font-size: 13px; }
+      #links .links ul .selected:before {
+        line-height: 62px;
+        -webkit-transition: all 0.4s ease-out;
+        -moz-transition: all 0.4s ease-out;
+        transition: all 0.4s ease-out; } }
   #links .links ul > li:hover > a {
     text-decoration: none; }
-  #links .links ul > li:hover {
+  #links .links ul > li.selected, #links .links ul > li:hover {
     background: #fafafa; }
 
 #login {
@@ -5521,7 +5562,12 @@ p {
     text-decoration: underline;
     text-align: center; }
 
+.visible {
+  display: -webkit-flex !important;
+  display: flex !important; }
+
 nav#actions {
+  display: none;
   position: fixed;
   bottom: 0px;
   left: 0px;

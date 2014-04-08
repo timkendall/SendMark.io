@@ -1,4 +1,10 @@
+.visible {
+   display: -webkit-flex !important;
+   display: flex !important;
+}
+
 nav#actions {
+  display: none;
   position: fixed;
   bottom: 0px;
   left:0px;
