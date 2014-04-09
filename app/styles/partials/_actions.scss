@@ -9,6 +9,7 @@ nav#actions {
   bottom: 0px;
   left:0px;
   right:0px;
+  z-index: 999;
   margin-bottom: (-$actions-bar-height);
   @include animation(slideInUp 0.3s ease-in-out);
   margin-bottom: 0px;

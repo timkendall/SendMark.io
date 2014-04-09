@@ -1,13 +1,10 @@
 extends layouts/default
 
 block content
-  div
-    nav.navbar-static-top.animated.slideInDown#header(ng-include="'views/header.html'", ng-show="user.authorized")
-    div.content
-      div.row
-        div.col-md-2#listsAndTags(ng-include="'views/sidebar.html'")
-        div.col-md-8#links(ng-view)
-        div.col-md-2
-    nav.content-center-rows#actions(action, ng-include="'views/actions.html'", ng-controller="ActionsCtrl", ng-class="{visible: global.actionsIsOpen}")
+  nav.navbar-static-top.animated.slideInDown#header(ng-include="'views/header.html'", ng-show="user.authorized")
+  div.grid.columns.split200
+    div.bar#listsAndTags(ng-include="'views/sidebar.html'")
+    div.content#links(ng-view)
+  nav.content-center-rows#actions(action, ng-include="'views/actions.html'", ng-controller="ActionsCtrl", ng-class="{visible: global.actionsIsOpen}")
   script(type="text/javascript").
     window.user = !{user};

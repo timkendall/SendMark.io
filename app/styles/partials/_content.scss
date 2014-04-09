@@ -1,13 +1,19 @@
-
+// Shadow for list header on scroll
+.shadow {
+  box-shadow: 0px 1px 3px lighten(#555, 50%);
+  @include transition (all 0.3s ease-in-out);
+}
 
 #links {
   margin-top: 60px;
   font-size: 14px;
+  padding-right: 20px;
 
   .links-header {
     width: inherit;
     background: #fff;
     border-bottom: 1px solid #ccc;
+    @include transition (all 0.1s ease-in-out);
 
     h1 {
       text-align: right;

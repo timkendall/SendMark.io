@@ -1,43 +1,38 @@
 <!-- List header -->
-<div ng-controller="ListsCtrl">
-<section class="clearfix links-header">
+<section class="grid rows split50" ng-controller="ListsCtrl">
+  <aside scroll class="bar clearfix links-header">
+    <section class="clearfix" >
+      <div class="form-group pull-left">
+        <input type="text" class="form-control" ng-model="search.title" id="filterLinks" placeholder="Search">
+      </div>
+      <div class="btn-group pull-left">
+        <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
+        <button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
+      </div>
 
-  <section class="pull-right">
+      <ul class="actions pull-right">
+        <li><ng-pluralize count="global.list.count" when="{'0': '0 items', 'one':'1 item', 'other': '{} items'}"></ng-pluralize></li>
+        <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
+        <li><a data-ng-click="remove()" href=""><i class="fa fa-times"></i> Delete</a></li>
+      </ul>
+    </section>
+  </aside>
 
-  </section>
+  <article class="content links" data-ng-init="findOne()" >
+    <!--List links in list -->
+    <ul ng-controller="LinksCtrl">
+      <li item ng-click="open()" ng-repeat="link in global.list._items | filter:search | orderBy:'-created'">
+        <input id="{{$index}}" type="checkbox" name="{{$index}}" value="{{$index}}">
+        <label for="{{$index}}"></label>
 
-  <section class="clearfix" >
-    <div class="form-group pull-left">
-      <input type="text" class="form-control" ng-model="search.title" id="filterLinks" placeholder="Search">
-    </div>
-    <div class="btn-group pull-left">
-      <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
-      <button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
-    </div>
-
-    <ul class="actions pull-right">
-      <li><ng-pluralize count="global.list.count" when="{'0': '0 items', 'one':'1 item', 'other': '{} items'}"></ng-pluralize></li>
-      <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
-      <li><a data-ng-click="remove()" href=""><i class="fa fa-times"></i> Delete</a></li>
+        <a ng-href="{{link.url}}" target="_blank">
+          <h2>{{link.title || link.title}}</h2>
+          <small>{{link.url}} <date am-time-ago="link.created" am-preprocess="unix"></date></small>
+        </a>
+      </li>
     </ul>
-  </section>
+
+    <h2 ng-hide="!global.list._items || global.list._items.length">No links yet.</h1>
+
+  </article>
 </section>
-
-<section class="links" data-ng-init="findOne()" >
-  <!-- List links in list -->
-  <ul ng-controller="LinksCtrl">
-    <li item ng-click="open()" ng-repeat="link in global.list._items | filter:search | orderBy:'-created'">
-      <input id="{{$index}}" type="checkbox" name="{{$index}}" value="{{$index}}">
-      <label for="{{$index}}"></label>
-
-      <a ng-href="{{link.url}}" target="_blank">
-        <h2>{{link.title || link.title}}</h2>
-        <small>{{link.url}} <date am-time-ago="link.created" am-preprocess="unix"></date></small>
-      </a>
-    </li>
-  </ul>
-
-  <h2 ng-hide="!global.list._items || global.list._items.length">No links yet.</h1>
-
-</section>
-</div>

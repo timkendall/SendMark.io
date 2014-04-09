@@ -1,4 +1,4 @@
-<section ng-show='user.authorized' ng-controller="ListsCtrl" class="fixed">
+<section ng-show='user.authorized' ng-controller="ListsCtrl">
   <h5>LISTS</h5>
 
   <ul id="lists" data-ng-init="find()">
@@ -6,7 +6,7 @@
         <a ng-href="#!/lists/{{list._id}}">{{list.name}}</a>
     </li>
 
-    <h2 ng-hide="!lists || lists.length">No lists yet.</h1>
+    <h2 ng-hide="!lists || lists.length">No lists yet.</h2>
 
     <li ng-controller="ModalCreateListCtrl"><button type="button" class="btn btn-default btn-sm outline" ng-click="open()"><i class="fa fa-plus"></i> New</button></li>
   </ul>
@@ -20,6 +20,6 @@
       <li><a href=""><span class="circle shadowed yellow pull-left"></span> Eat</a></li>
       <li><a href=""><span class="circle shadowed grey pull-left"></span> Do</a></li>
     </ul>
-</h2>
 
+</section>
 

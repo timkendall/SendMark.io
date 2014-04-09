@@ -28,7 +28,7 @@
     <!-- Header -->
 <div class="wrap">
 <!-- Header -->
-<div class="container-fluid" id="header" ng-controller="HeaderCtrl">
+<div id="header" ng-controller="HeaderCtrl">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
 
@@ -39,7 +39,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <ul class="nav navbar-nav account">
+      <ul class="account">
         <li class="dropdown">
         <!-- Big button for dropdown -->
         <a class="dropdown-toggle">
@@ -58,8 +58,7 @@
       </ul>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" collapse="isCollapsed">
+
 
       <section class="inbox" ng-class='{active: isActive("/inbox")}'>
         <a href="#!/inbox"><i class="fa fa-inbox"></i></a>
@@ -72,12 +71,13 @@
         <button type="submit" class="btn btn-default">Add</button>
       </form>
 
-    </div><!-- /.navbar-collapse -->
+
   </div><!-- /.container-fluid -->
-      <div class="content">
+
         <!-- Responsive 3 column grid -->
-        <div class="row">
-          <div class="col-md-2" id="listsAndTags">
+        <div class="grid columns split200">
+          <div class="bar" id="listsAndTags">
+
             <!-- sidebar -->
             <h5>LISTS</h5>
             <ul id="lists">
@@ -98,84 +98,80 @@
               <li><a href=""><span class="circle shadowed grey pull-left"></span> Do</a></li>
 
             </ul>
+
           </div>
 
-          <div class="col-md-8" id="links">
+          <div class="content" id="links">
             <!-- main content -->
 
-            <!-- List header -->
-            <section class="clearfix">
+            <div class="grid rows split40">
 
-              <section class="pull-left">
-                <h1>Beta</h1>
-                <date>last modified 3 days ago</date>
+              <!-- List header -->
+              <section class="bar clearfix links-header shadow">
+
+                  <div class="form-group pull-left">
+                    <input type="text" class="form-control" id="filterLinks" placeholder="Search">
+                  </div>
+                  <div class="btn-group pull-left">
+                    <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
+                    <button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
+                  </div>
+                  <ul class="actions pull-right">
+                    <li>21 items</li>
+                    <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
+                    <li><a href=""><i class="fa fa-times"></i> Delete</a></li>
+                </ul>
+
               </section>
 
-              <section class="clearfix">
-                <div class="form-group pull-left">
-                  <input type="text" class="form-control" id="filterLinks" placeholder="Search">
-                </div>
-                <div class="btn-group pull-left">
-                  <button type="button" class="btn btn-default"><i class="fa fa-align-left"></i></button>
-                  <button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
-                </div>
-                <ul class="actions pull-right">
-                  <li>21 items</li>
-                  <li><a href=""><i class="fa fa-eraser"></i> Rename</a></li>
-                  <li><a href=""><i class="fa fa-times"></i> Delete</a></li>
-              </ul>
+              <!-- Links list/grid (scrollable!) -->
+              <section class="content links">
+                <ul>
+                  <li class="">
+
+                  <input id="check1" type="checkbox" name="check" value="check1">
+                  <label for="check1"></label>
+
+                  <a href="">
+                      <h2>User Managment for Web and Mobile UserApp</h2>
+                      <small>http://userapp.io <date>1 day ago</date></small>
+                    </a>
+                  </li>
+                  <li>
+
+                  <input id="check2" type="checkbox" name="check" value="check1">
+                  <label for="check2"></label>
+                  <a href="">
+                      <h2>User Managment for Web and Mobile - UserApp</h2>
+                      <small>http://userapp.io <date>1 day ago</date></small>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <h2>User Managment for Web and Mobile - UserApp</h2>
+                      <small>http://userapp.io <date>1 day ago</date></small>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <h2>User Managment for Web and Mobile - UserApp</h2>
+                      <small>http://userapp.io <date>1 day ago</date></small>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <h2>User Managment for Web and Mobile - UserApp</h2>
+                      <small>http://userapp.io <date>1 day ago</date></small>
+                    </a>
+                  </li>
+                </ul>
               </section>
-            </section>
 
-            <!-- Links list/grid (scrollable!) -->
-            <section class="links">
-              <ul>
-                <li class="selected">
+            </div>
 
-                <input id="check1" type="checkbox" name="check" value="check1">
-                <label for="check1"></label>
-
-                <a href="">
-                    <h2>User Managment for Web and Mobile UserApp</h2>
-                    <small>http://userapp.io <date>1 day ago</date></small>
-                  </a>
-                </li>
-                <li>
-
-                <input id="check2" type="checkbox" name="check" value="check1">
-                <label for="check2"></label>
-                <a href="">
-                    <h2>User Managment for Web and Mobile - UserApp</h2>
-                    <small>http://userapp.io <date>1 day ago</date></small>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <h2>User Managment for Web and Mobile - UserApp</h2>
-                    <small>http://userapp.io <date>1 day ago</date></small>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <h2>User Managment for Web and Mobile - UserApp</h2>
-                    <small>http://userapp.io <date>1 day ago</date></small>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <h2>User Managment for Web and Mobile - UserApp</h2>
-                    <small>http://userapp.io <date>1 day ago</date></small>
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </div>
-
-          <div class="col-md-2">
-            <!-- secondary sidebar -->
           </div>
         </div>
-    </div>
+
 </div>
     <nav id="actions" class="content-center-rows">
     <ul>
