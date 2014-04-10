@@ -39,6 +39,10 @@ var LinkSchema = new Schema({
 				type: Number,
 				default: 0
 		},
+		selected: {
+			type: Boolean,
+			default: false
+		},
 		_lists: [{
 			type: Schema.ObjectId,
 			ref: 'List'
@@ -113,7 +117,9 @@ LinkSchema.post('save', function (doc) {
 LinkSchema.post('remove', function (doc) {
 	// Remove self from _lists
 	doc._lists.forEach(function (_list) {
-		_list.removeItem(doc._id);
+		List.findOne({ _id: _list}, function (err, list) {
+			list.removeItem(doc._id);
+		});
 	})
 });
 

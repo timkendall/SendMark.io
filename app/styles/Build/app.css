@@ -5927,7 +5927,8 @@ html {
 #links {
   margin-top: 60px;
   font-size: 14px;
-  padding-right: 20px; }
+  padding-right: 20px;
+  padding-bottom: 20px; }
   #links .links-header {
     width: inherit;
     background: #fff;
@@ -6163,7 +6164,8 @@ nav#actions {
   height: 80px;
   background: #f2f2f2; }
   nav#actions ul {
-    margin: 0px; }
+    margin: 0px;
+    padding: 0px; }
     nav#actions ul li {
       display: inline-block;
       cursor: pointer;

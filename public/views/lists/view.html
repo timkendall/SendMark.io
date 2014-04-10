@@ -21,9 +21,9 @@
   <article class="content links" data-ng-init="findOne()" >
     <!--List links in list -->
     <ul ng-controller="LinksCtrl">
-      <li item ng-click="open()" ng-repeat="link in global.list._items | filter:search | orderBy:'-created'">
-        <input id="{{$index}}" type="checkbox" name="{{$index}}" value="{{$index}}">
-        <label for="{{$index}}"></label>
+      <li ng-repeat="link in global.list._items | filter:search | orderBy:'-created'" ng-class="{selected: link.selected}">
+        <input ng-click="open()"id="{{$index}}" type="checkbox" name="{{$index}}" value="{{$index}}" ng-model="link.selected">
+        <label  for="{{$index}}"></label>
 
         <a ng-href="{{link.url}}" target="_blank">
           <h2>{{link.title || link.title}}</h2>

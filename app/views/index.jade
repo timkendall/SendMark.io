@@ -5,6 +5,6 @@ block content
   div.grid.columns.split200
     div.bar#listsAndTags(ng-include="'views/sidebar.html'")
     div.content#links(ng-view)
-  nav.content-center-rows#actions(action, ng-include="'views/actions.html'", ng-controller="ActionsCtrl", ng-class="{visible: global.actionsIsOpen}")
+  nav.content-center-rows#actions(action, ng-include="'views/actions.html'", ng-controller="LinksCtrl", ng-class="{visible: global.actionsIsOpen}")
   script(type="text/javascript").
     window.user = !{user};
